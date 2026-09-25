@@ -1,0 +1,228 @@
+# Day2Day College Management — AI Agent Integration Guide & Templates
+
+> Machine-readable guide for LLMs and AI Agents integrating with Day2Day.
+> Timezone: Asia/Makassar (WITA, UTC+8)
+> Base URL: http://localhost:3000
+> Auth Header: Authorization: Bearer <API_KEY>
+
+---
+
+## 1. System Prompt Template for AI Agents
+
+Copy and paste this into your AI Agent's system prompt (e.g. OpenAI GPTs, Claude, LangChain, or Telegram Bot):
+
+```text
+You are Day2Day College Assistant, an intelligent personal assistant managing Darren's college life.
+Your goal is to help schedule classes, study sessions, and manage assignment deadlines.
+
+Key Rules:
+1. Always respect the timezone: Asia/Makassar (UTC+8).
+2. Before scheduling any activity, check for available free time slots using GET /api/schedules/free-time.
+3. If an activity overlaps with an existing schedule, the API will return HTTP 409 Conflict. Propose another free slot.
+4. Categorize activities using the Eisenhower Matrix:
+   - IMPORTANT_URGENT (Q1: Do First - urgent deadlines, exams)
+   - IMPORTANT_NOT_URGENT (Q2: Plan - deep study, assignments due later, exercise)
+   - NOT_IMPORTANT_URGENT (Q3: Delegate / Quick tasks)
+   - NOT_IMPORTANT_NOT_URGENT (Q4: Eliminate / Leisure)
+```
+
+---
+
+## 2. Strict Allowed Values (Enums)
+
+AI MUST ONLY use these exact string literals. Any other value will be rejected with HTTP 422:
+
+### Category (`category`)
+- `IMPORTANT_URGENT` (Q1: Do First)
+- `IMPORTANT_NOT_URGENT` (Q2: Plan / Schedule)
+- `NOT_IMPORTANT_URGENT` (Q3: Delegate / Quick)
+- `NOT_IMPORTANT_NOT_URGENT` (Q4: Eliminate / Leisure)
+
+### Repeat Types (`repeat.type`)
+- `none` | `daily` | `weekly` | `monthly` | `yearly` | `custom`
+
+### Days of Week (`repeat.days`)
+- `MONDAY` | `TUESDAY` | `WEDNESDAY` | `THURSDAY` | `FRIDAY` | `SATURDAY` | `SUNDAY`
+
+### Assignment Status (`status`)
+- `PENDING` | `IN_PROGRESS` | `COMPLETED`
+
+### Assignment Filter View (`view`)
+- `active` | `overdue` | `completed` | `all`
+
+---
+
+## 3. JSON Templates for Schedules (`POST /api/schedules`)
+
+### Template A: One-off Activity (Belajar / Kegiatan Sekali Saja)
+```json
+{
+  "title": "Belajar Mandiri Next.js",
+  "category": "IMPORTANT_NOT_URGENT",
+  "date": "2026-09-28",
+  "start": "14:00",
+  "end": "16:00",
+  "repeat": {
+    "type": "none"
+  }
+}
+```
+
+### Template B: Recurring Weekly Lecture (Kuliah Rutin Mingguan)
+```json
+{
+  "title": "Kuliah Struktur Data & Algoritma",
+  "category": "IMPORTANT_URGENT",
+  "date": "2026-09-28",
+  "start": "08:00",
+  "end": "10:30",
+  "repeat": {
+    "type": "weekly",
+    "interval": 1,
+    "days": ["MONDAY"],
+    "until": "2026-12-31"
+  }
+}
+```
+
+### Template C: Multi-day Recurring Study Block (Belajar Rutin Tiap Senin & Rabu)
+```json
+{
+  "title": "Study Block: Pemrograman Web",
+  "category": "IMPORTANT_NOT_URGENT",
+  "date": "2026-09-28",
+  "start": "19:00",
+  "end": "21:00",
+  "repeat": {
+    "type": "weekly",
+    "interval": 1,
+    "days": ["MONDAY", "WEDNESDAY"]
+  }
+}
+```
+
+---
+
+## 3. JSON Templates for Assignments (`POST /api/assignments`)
+
+### Template A: Standard Homework / Paper (Tugas / Makalah)
+```json
+{
+  "title": "Makalah Etika Profesi Komputer",
+  "course_name": "Etika Profesi",
+  "due_date": "2026-10-02",
+  "due_time": "23:59",
+  "estimated_duration_minutes": 120,
+  "category": "IMPORTANT_NOT_URGENT",
+  "notes": "Format APA 7th, minimal 5 halaman, submit di LMS"
+}
+```
+
+### Template B: Major Project Milestone (Tugas Besar / Proyek)
+```json
+{
+  "title": "Final Project: Implementasi API Supabase",
+  "course_name": "Rekayasa Perangkat Lunak",
+  "due_date": "2026-10-15",
+  "due_time": "23:59",
+  "estimated_duration_minutes": 360,
+  "category": "IMPORTANT_URGENT",
+  "notes": "Lengkap dengan unit tests dan migration script"
+}
+```
+
+### Template C: Quick Quiz / Homework (Kuis Singkat)
+```json
+{
+  "title": "Quiz Mingguan Algoritma",
+  "course_name": "Algoritma",
+  "due_date": "2026-09-29",
+  "due_time": "18:00",
+  "estimated_duration_minutes": 45,
+  "category": "IMPORTANT_URGENT",
+  "notes": "Pilihan ganda di Google Classroom"
+}
+```
+
+---
+
+## 4. End-to-End AI Auto-Scheduling Workflow
+
+When a user asks: *"Jadwalkan waktu untuk mengerjakan tugas yang paling mendesak minggu ini"*:
+
+### Step 1: Ambil tugas aktif yang belum selesai
+```http
+GET /api/assignments?view=active
+Authorization: Bearer <API_KEY>
+```
+*AI membaca*: Tugas terdekat adalah `"Makalah Etika Profesi"`, `due_date: 2026-10-02`, estimasi pengerjaan: `120` menit (2 jam).
+
+### Step 2: Cek waktu luang di kalender sebelum deadline
+```http
+GET /api/schedules/free-time?date=2026-10-01
+Authorization: Bearer <API_KEY>
+```
+*API Response*:
+```json
+{
+  "date": "2026-10-01",
+  "free_time": [
+    { "start": "00:00", "end": "08:00", "duration_minutes": 480 },
+    { "start": "10:00", "end": "12:00", "duration_minutes": 120 },
+    { "start": "14:00", "end": "18:00", "duration_minutes": 240 },
+    { "start": "20:00", "end": "24:00", "duration_minutes": 240 }
+  ]
+}
+```
+
+### Step 3: Pilih slot luang yang cocok dan jadwalkan kegiatan
+Pilih slot siang: `14:00` sampai `16:00` (120 menit).
+```http
+POST /api/schedules
+Authorization: Bearer <API_KEY>
+Content-Type: application/json
+
+{
+  "title": "Mengerjakan Makalah Etika Profesi",
+  "category": "IMPORTANT_URGENT",
+  "date": "2026-10-01",
+  "start": "14:00",
+  "end": "16:00",
+  "repeat": { "type": "none" }
+}
+```
+
+### Step 4: Setelah selesai dikerjakan, tandai tugas komplit
+```http
+PATCH /api/assignments/<assignment_id>
+Authorization: Bearer <API_KEY>
+Content-Type: application/json
+
+{
+  "status": "COMPLETED"
+}
+```
+
+---
+
+## 5. Summary of Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/schedules/today` | Jadwal hari ini di Asia/Makassar |
+| `GET` | `/api/schedules?date=YYYY-MM-DD` | Jadwal spesifik tanggal |
+| `GET` | `/api/schedules/free-time?date=YYYY-MM-DD` | Daftar slot kosong 24 jam |
+| `GET` | `/api/schedules/summary?date=YYYY-MM-DD` | Statistik pemakaian jam & % free |
+| `POST` | `/api/schedules` | Buat kegiatan (dengan conflict detection) |
+| `PATCH` | `/api/schedules/:id` | Update kegiatan |
+| `DELETE` | `/api/schedules/:id` | Hapus kegiatan |
+| `GET` | `/api/assignments?view=active` | Tugas aktif & belum lewat tenggat |
+| `GET` | `/api/assignments?view=overdue` | Riwayat tugas terlewat |
+| `GET` | `/api/assignments?view=completed`| Riwayat tugas selesai |
+| `GET` | `/api/assignments?view=all` | Semua tugas + summary count |
+| `POST` | `/api/assignments` | Buat tugas baru dengan estimasi durasi |
+| `PATCH` | `/api/assignments/:id` | Update status tugas (PENDING/COMPLETED) |
+| `DELETE` | `/api/assignments/:id` | Hapus tugas |
+| `GET` | `/api/keys` | Daftar API Keys |
+| `POST` | `/api/keys` | Generate API Key baru |
+| `GET` | `/api/docs` | OpenAPI 3.1 & Playground Interaktif |
