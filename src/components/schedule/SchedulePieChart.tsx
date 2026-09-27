@@ -87,7 +87,7 @@ export function SchedulePieChart({
   let accumulatedPercentage = 0;
 
   return (
-    <div className="p-6 rounded-2xl bg-gray-900/50 border border-gray-800/80 backdrop-blur-md flex flex-col md:flex-row items-center gap-8">
+    <div className="p-6 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md flex flex-col md:flex-row items-center gap-8">
       {/* Donut Chart Visual */}
       <div className="relative flex-shrink-0 flex items-center justify-center">
         <svg
@@ -107,12 +107,8 @@ export function SchedulePieChart({
           />
 
           {slices.map((slice) => {
-            const strokeDasharray = `${
-              (slice.percentage / 100) * circumference
-            } ${circumference}`;
-            const strokeDashoffset = `${
-              -(accumulatedPercentage / 100) * circumference
-            }`;
+            const strokeDasharray = `${ (slice.percentage / 100) * circumference } ${circumference}`;
+            const strokeDashoffset = `${ -(accumulatedPercentage / 100) * circumference }`;
             accumulatedPercentage += slice.percentage;
 
             const isHovered = hoveredSlice?.id === slice.id;
@@ -141,25 +137,25 @@ export function SchedulePieChart({
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4">
           {hoveredSlice ? (
             <div className="animate-in fade-in duration-150">
-              <span className="text-xs text-gray-400 font-medium truncate block max-w-[120px]">
+              <span className="text-xs text-zinc-500 dark:text-zinc-500 font-medium truncate block max-w-[120px]">
                 {hoveredSlice.title}
               </span>
-              <span className="text-xl font-bold text-white font-mono">
+              <span className="text-xl font-bold text-zinc-900 dark:text-white font-mono">
                 {hoveredSlice.percentage}%
               </span>
-              <span className="text-[11px] text-gray-400 block font-mono">
+              <span className="text-[11px] text-zinc-500 dark:text-zinc-500 block font-mono">
                 {formatDuration(hoveredSlice.duration_minutes)}
               </span>
             </div>
           ) : (
             <div>
-              <span className="text-[11px] text-gray-400 uppercase tracking-wider font-semibold block">
+              <span className="text-[11px] text-zinc-500 dark:text-zinc-500 uppercase tracking-wider font-semibold block">
                 24 Hours
               </span>
-              <span className="text-2xl font-bold text-white font-mono">
+              <span className="text-2xl font-bold text-zinc-900 dark:text-white font-mono">
                 {((freeMinutes / totalMinutes) * 100).toFixed(0)}%
               </span>
-              <span className="text-[11px] text-cyan-400 flex items-center justify-center gap-1">
+              <span className="text-[11px] text-[#3B82F6] dark:text-[#3B82F6] flex items-center justify-center gap-1">
                 <Sparkles className="w-3 h-3" />
                 Free Time
               </span>
@@ -170,11 +166,11 @@ export function SchedulePieChart({
 
       {/* Legend & Details */}
       <div className="flex-1 w-full space-y-3">
-        <div className="flex items-center justify-between pb-2 border-b border-gray-800">
-          <h3 className="text-sm font-semibold text-gray-200">
+        <div className="flex items-center justify-between pb-2 border-b border-zinc-300 dark:border-zinc-800/50">
+          <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
             24-Hour Time Distribution
           </h3>
-          <span className="text-xs font-mono text-gray-400">1440 min (100%)</span>
+          <span className="text-xs font-mono text-zinc-500 dark:text-zinc-500">1440 min (100%)</span>
         </div>
 
         <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
@@ -183,11 +179,7 @@ export function SchedulePieChart({
               key={slice.id}
               onMouseEnter={() => setHoveredSlice(slice)}
               onMouseLeave={() => setHoveredSlice(null)}
-              className={`flex items-center justify-between p-2 rounded-xl transition-colors cursor-pointer ${
-                hoveredSlice?.id === slice.id
-                  ? 'bg-gray-800/80 border border-gray-700'
-                  : 'hover:bg-gray-800/40'
-              }`}
+              className={`flex items-center justify-between p-2 rounded-3xl transition-colors cursor-pointer ${ hoveredSlice?.id === slice.id ? 'bg-white/80 dark:bg-zinc-800/50 border border-zinc-300 dark:border-zinc-800/50' : 'hover:bg-gray-800/40' }`}
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span
@@ -195,11 +187,11 @@ export function SchedulePieChart({
                   style={{ backgroundColor: slice.color }}
                 />
                 <div className="min-w-0">
-                  <div className="text-xs font-medium text-gray-200 truncate">
+                  <div className="text-xs font-medium text-zinc-800 dark:text-zinc-200 truncate">
                     {slice.title}
                   </div>
                   {slice.timeRange && (
-                    <div className="text-[10px] text-gray-400 font-mono">
+                    <div className="text-[10px] text-zinc-500 dark:text-zinc-500 font-mono">
                       {slice.timeRange}
                     </div>
                   )}
@@ -207,10 +199,10 @@ export function SchedulePieChart({
               </div>
 
               <div className="text-right flex-shrink-0 ml-3">
-                <div className="text-xs font-bold font-mono text-gray-200">
+                <div className="text-xs font-bold font-mono text-zinc-800 dark:text-zinc-200">
                   {formatDuration(slice.duration_minutes)}
                 </div>
-                <div className="text-[11px] font-mono text-gray-400">
+                <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-500">
                   {slice.percentage}%
                 </div>
               </div>

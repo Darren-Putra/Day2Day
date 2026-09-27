@@ -66,16 +66,16 @@ export function AssignmentCard({
     }
     if (days === 1) {
       return (
-        <span className="text-[11px] text-cyan-400 font-medium flex items-center gap-1">
-          <Clock className="w-3.5 h-3.5 text-cyan-400" />
+        <span className="text-[11px] text-[#3B82F6] dark:text-[#3B82F6] font-medium flex items-center gap-1">
+          <Clock className="w-3.5 h-3.5 text-[#3B82F6] dark:text-[#3B82F6]" />
           <span>Due Tomorrow at {assignment.due_time}</span>
         </span>
       );
     }
 
     return (
-      <span className="text-[11px] text-gray-400 flex items-center gap-1 font-mono">
-        <Calendar className="w-3.5 h-3.5 text-gray-400" />
+      <span className="text-[11px] text-zinc-500 dark:text-zinc-500 flex items-center gap-1 font-mono">
+        <Calendar className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-500" />
         <span>Due {assignment.due_date} • {assignment.due_time} ({days} days left)</span>
       </span>
     );
@@ -83,13 +83,7 @@ export function AssignmentCard({
 
   return (
     <div
-      className={`relative p-5 rounded-2xl border transition-all duration-200 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4 group ${
-        isCompleted
-          ? 'bg-gray-950/40 border-gray-800/50 opacity-60'
-          : isOverdue
-          ? 'bg-red-950/20 border-red-500/30 hover:border-red-500/50'
-          : 'bg-gray-900/60 border-gray-800/80 hover:border-indigo-500/40'
-      }`}
+      className={`relative p-5 rounded-2xl border transition-all duration-200 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4 group ${ isCompleted ? 'bg-gray-950/40 border-zinc-200 dark:border-zinc-800/50 opacity-60' : isOverdue ? 'bg-red-950/20 border-red-500/30 hover:border-red-500/50' : 'bg-white/70 dark:bg-zinc-900/30 border-zinc-200 dark:border-zinc-800/50 hover:border-[#1E3A8A]/40 hover:dark:border-[#1E3A8A]/60' }`}
     >
       {/* Category accent bar on the left */}
       <div
@@ -103,13 +97,13 @@ export function AssignmentCard({
           onClick={() =>
             onToggleStatus(assignment.id, isCompleted ? 'PENDING' : 'COMPLETED')
           }
-          className="mt-0.5 text-gray-400 hover:text-emerald-400 transition-colors flex-shrink-0"
+          className="mt-0.5 text-zinc-500 dark:text-zinc-500 hover:text-emerald-400 transition-colors flex-shrink-0"
           title={isCompleted ? 'Mark as Pending' : 'Mark as Completed'}
         >
           {isCompleted ? (
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           ) : (
-            <Circle className="w-5 h-5 text-gray-500 hover:text-gray-300" />
+            <Circle className="w-5 h-5 text-zinc-400 dark:text-zinc-600 hover:text-zinc-700 hover:dark:text-zinc-300" />
           )}
         </button>
 
@@ -117,9 +111,7 @@ export function AssignmentCard({
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <h4
-              className={`text-sm sm:text-base font-semibold truncate ${
-                isCompleted ? 'text-gray-400 line-through' : 'text-gray-100'
-              }`}
+              className={`text-sm sm:text-base font-semibold truncate ${ isCompleted ? 'text-zinc-500 dark:text-zinc-500 line-through' : 'text-zinc-900 dark:text-zinc-100' }`}
             >
               {assignment.title}
             </h4>
@@ -139,8 +131,8 @@ export function AssignmentCard({
             <span className="text-gray-600">•</span>
 
             {/* Estimated work duration */}
-            <span className="text-[11px] font-mono text-indigo-300/90 flex items-center gap-1 bg-indigo-500/10 px-2 py-0.5 rounded-md border border-indigo-500/20">
-              <Clock className="w-3 h-3 text-indigo-400" />
+            <span className="text-[11px] font-mono text-indigo-300/90 flex items-center gap-1 bg-[#1E3A8A]/10 dark:bg-[#1E3A8A]/25 px-2 py-0.5 rounded-full border border-[#1E3A8A]/30 dark:border-[#1E3A8A]/60">
+              <Clock className="w-3 h-3 text-[#3B82F6] dark:text-[#3B82F6]" />
               <span>Est. {formatDuration(assignment.estimated_duration_minutes)}</span>
             </span>
 
@@ -155,7 +147,7 @@ export function AssignmentCard({
           </div>
 
           {assignment.notes && (
-            <p className="text-xs text-gray-400 mt-2 line-clamp-1 italic">
+            <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2 line-clamp-1 italic">
               {assignment.notes}
             </p>
           )}
@@ -167,7 +159,7 @@ export function AssignmentCard({
         {!isCompleted && (
           <Link
             href="/schedule"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white text-xs font-semibold border border-indigo-500/30 transition-all"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-3xl bg-indigo-600/20 hover:bg-[#1D4ED8] hover:dark:bg-[#1D4ED8] text-indigo-300 hover:text-zinc-900 dark:hover:text-white text-xs font-semibold border border-indigo-500/30 transition-all"
             title="Schedule study block for this task in 24h schedule"
           >
             <CalendarPlus className="w-3.5 h-3.5" />
@@ -177,7 +169,7 @@ export function AssignmentCard({
 
         <button
           onClick={() => onEdit(assignment)}
-          className="p-2 text-gray-400 hover:text-indigo-400 rounded-lg hover:bg-indigo-500/10 transition-colors"
+          className="p-2 text-zinc-500 dark:text-zinc-500 hover:text-[#3B82F6] hover:dark:text-[#3B82F6] rounded-2xl hover:bg-[#1E3A8A]/10 hover:dark:bg-[#1E3A8A]/25 transition-colors"
           title="Edit assignment"
         >
           <Edit2 className="w-4 h-4" />
@@ -185,7 +177,7 @@ export function AssignmentCard({
 
         <button
           onClick={() => onDelete(assignment.id)}
-          className="p-2 text-gray-400 hover:text-red-400 rounded-lg hover:bg-red-500/10 transition-colors"
+          className="p-2 text-zinc-500 dark:text-zinc-500 hover:text-red-400 rounded-2xl hover:bg-red-500/10 transition-colors"
           title="Delete assignment"
         >
           <Trash2 className="w-4 h-4" />

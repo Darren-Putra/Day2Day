@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, LogOut, Clock, User, ShieldCheck } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
   onMenuToggle: () => void;
@@ -55,21 +56,21 @@ export function AppNavbar({
   };
 
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 lg:px-8 border-b border-gray-800/80 bg-gray-950/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 lg:px-8 border-b border-zinc-200 dark:border-zinc-800/50 bg-white/80 dark:bg-black/20 backdrop-blur-xl">
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={onMenuToggle}
-          className="p-2 -ml-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/60 lg:hidden focus:outline-none"
+          className="p-2 -ml-2 text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-2xl hover:bg-zinc-100/60 hover:dark:bg-zinc-800/50 lg:hidden focus:outline-none"
           aria-label="Toggle navigation menu"
         >
           <Menu className="w-5 h-5" />
         </button>
 
-        <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-gray-400 bg-gray-900/60 border border-gray-800 px-3 py-1.5 rounded-lg">
-          <Clock className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-zinc-500 dark:text-zinc-500 bg-white/70 dark:bg-zinc-900/30 border border-zinc-300 dark:border-zinc-800/50 px-3 py-1.5 rounded-2xl">
+          <Clock className="w-3.5 h-3.5 text-[#3B82F6] dark:text-[#3B82F6]" />
           <span>{currentTime ? `${currentTime} WITA` : 'Loading...'}</span>
-          <span className="text-[10px] text-gray-400 font-sans">
+          <span className="text-[10px] text-zinc-500 dark:text-zinc-500 font-sans">
             (Asia/Makassar)
           </span>
         </div>
@@ -77,35 +78,38 @@ export function AppNavbar({
 
       <div className="flex items-center gap-4">
         {/* User profile pill */}
-        <div className="flex items-center gap-3 pl-3 border-l border-gray-800/80">
+        <div className="flex items-center gap-3 pl-3 border-l border-zinc-200 dark:border-zinc-800/50">
           <div className="flex items-center gap-2.5">
             {userAvatar ? (
               <img
                 src={userAvatar}
                 alt={userName}
-                className="w-8 h-8 rounded-full border border-indigo-500/40 object-cover"
+                className="w-8 h-8 rounded-full border border-[#1E3A8A]/40 dark:border-[#1E3A8A]/60 object-cover"
               />
             ) : (
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shadow-md shadow-indigo-500/20">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#1E3A8A] to-[#1D4ED8] flex items-center justify-center text-zinc-900 dark:text-white text-xs font-bold shadow-md shadow-blue-900/20">
                 {userName.charAt(0).toUpperCase()}
               </div>
             )}
             <div className="hidden md:block text-left">
-              <div className="text-xs font-semibold text-gray-200 leading-tight">
+              <div className="text-xs font-semibold text-zinc-800 dark:text-zinc-200 leading-tight">
                 {userName}
               </div>
-              <div className="text-[11px] text-gray-400 leading-tight">
+              <div className="text-[11px] text-zinc-500 dark:text-zinc-500 leading-tight">
                 {userEmail}
               </div>
             </div>
           </div>
+
+          {/* Theme toggle */}
+          <ThemeToggle />
 
           {/* Logout button */}
           <button
             onClick={handleLogout}
             disabled={isLoggingOut}
             title="Log Out"
-            className="p-2 text-gray-400 hover:text-red-400 rounded-lg hover:bg-red-500/10 transition-colors ml-1"
+            className="p-2 text-zinc-500 dark:text-zinc-500 hover:text-red-400 rounded-2xl hover:bg-red-500/10 transition-colors ml-1"
           >
             <LogOut className="w-4 h-4" />
           </button>

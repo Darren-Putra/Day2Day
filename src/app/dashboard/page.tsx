@@ -172,109 +172,53 @@ export default function DashboardPage() {
       href: '#',
       status: 'Coming Soon',
       statusColor: 'bg-gray-800 text-gray-400 border border-gray-700',
-      iconGradient: 'from-gray-700 to-gray-800',
-      comingSoon: true,
-    },
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 flex flex-col">
-      <AppSidebar
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-      />
-
-      <div className="lg:pl-64 flex flex-col flex-1">
-        <AppNavbar
-          onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
-          userName={userName}
-          userEmail={userEmail}
-          userAvatar={userAvatar}
-        />
-
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full space-y-8">
-          {/* Greeting Hero */}
-          <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-indigo-950/60 via-gray-900 to-cyan-950/40 border border-gray-800/80 shadow-2xl backdrop-blur-xl">
-            <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-medium mb-3">
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>College Management Workspace</span>
-                </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
-                  {greeting}, {userName}
-                </h2>
-                <p className="text-sm text-gray-400 mt-1 max-w-xl">
-                  Here is your college overview for today in{' '}
-                  <span className="text-cyan-400 font-mono font-medium">
-                    Asia/Makassar
-                  </span>
-                  .
-                </p>
-              </div>
-
-              {/* Schedule CTA */}
-              <div className="flex-shrink-0 flex items-center gap-3">
-                <Link
-                  href="/schedule"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-semibold text-xs sm:text-sm shadow-xl shadow-indigo-600/30 transition-all active:scale-95"
-                >
-                  <CalendarClock className="w-4 h-4" />
-                  <span>Open Schedule</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Today's Schedule Snapshot */}
+      iconGradient: 'from-gray-700 to-gray-800', comingSoon: true, }, ]; return ( <div className="min-h-screen bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 flex flex-col"> <AppSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} /> <div className="lg:pl-64 flex flex-col flex-1"> <AppNavbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} userName={userName} userEmail={userEmail} userAvatar={userAvatar} /> <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full space-y-8"> {/* Greeting Hero */} <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-indigo-950/60 via-gray-900 to-cyan-950/40 border border-zinc-200 dark:border-zinc-800/50 shadow-2xl backdrop-blur-xl"> <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-[#1E3A8A]/10 dark:bg-[#1E3A8A]/25 rounded-full blur-3xl pointer-events-none" /> <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6"> <div> <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1E3A8A]/10 dark:bg-[#1E3A8A]/25 border border-[#1E3A8A]/30 dark:border-[#1E3A8A]/60 text-indigo-300 text-xs font-medium mb-3"> <Sparkles className="w-3.5 h-3.5 text-[#3B82F6] dark:text-[#3B82F6]" /> <span>College Management Workspace</span> </div> <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white"> {greeting}, {userName} </h2> <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-1 max-w-xl"> Here is your college overview for today in{' '} <span className="text-[#3B82F6] dark:text-[#3B82F6] font-mono font-medium"> Asia/Makassar </span> . </p> </div> {/* Schedule CTA */} <div className="flex-shrink-0 flex items-center gap-3"> <Link href="/schedule" className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#1E3A8A] to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-zinc-900 dark:text-white font-semibold text-xs sm:text-sm shadow-xl shadow-indigo-600/30 transition-all active:scale-95" > <CalendarClock className="w-4 h-4" /> <span>Open Schedule</span> <ArrowRight className="w-4 h-4" /> </Link> </div> </div> </div> {/* Today's Schedule Snapshot */}
           <section className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-bold text-gray-100 tracking-tight">
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
                   Today&apos;s Schedule
                 </h3>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-zinc-500 dark:text-zinc-500">
                   {todayDate} • Daily overview & free time balance
                 </p>
               </div>
 
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-900 border border-gray-800 text-xs font-medium text-gray-300 hover:text-white hover:border-indigo-500/40 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-3xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800/50 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:border-[#1E3A8A]/40 hover:dark:border-[#1E3A8A]/60 transition-colors"
               >
-                <Plus className="w-3.5 h-3.5 text-indigo-400" />
+                <Plus className="w-3.5 h-3.5 text-[#3B82F6] dark:text-[#3B82F6]" />
                 <span>Add Activity</span>
               </button>
             </div>
 
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 rounded-2xl bg-gray-900/60 border border-gray-800/80 backdrop-blur-md">
-                <span className="text-xs text-gray-400 font-medium">Activities Planned</span>
-                <div className="mt-2 text-2xl font-bold font-mono text-white">
+              <div className="p-4 rounded-2xl bg-white/70 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md">
+                <span className="text-xs text-zinc-500 dark:text-zinc-500 font-medium">Activities Planned</span>
+                <div className="mt-2 text-2xl font-bold font-mono text-zinc-900 dark:text-white">
                   {summary.activity_count} Activities
                 </div>
-                <div className="text-[11px] text-gray-400 mt-1">Today in calendar</div>
+                <div className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-1">Today in calendar</div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-gray-900/60 border border-gray-800/80 backdrop-blur-md">
+              <div className="p-4 rounded-2xl bg-white/70 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md">
                 <span className="text-xs text-indigo-300 font-medium">Scheduled Time</span>
-                <div className="mt-2 text-2xl font-bold font-mono text-indigo-400">
+                <div className="mt-2 text-2xl font-bold font-mono text-[#3B82F6] dark:text-[#3B82F6]">
                   {formatDuration(summary.scheduled_minutes)} Scheduled
                 </div>
-                <div className="text-[11px] text-gray-400 mt-1">
+                <div className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-1">
                   {summary.scheduled_percentage}% of your day
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-gray-900/60 border border-gray-800/80 backdrop-blur-md">
+              <div className="p-4 rounded-2xl bg-white/70 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md">
                 <span className="text-xs text-cyan-300 font-medium">Free Time</span>
-                <div className="mt-2 text-2xl font-bold font-mono text-cyan-400">
+                <div className="mt-2 text-2xl font-bold font-mono text-[#3B82F6] dark:text-[#3B82F6]">
                   {formatDuration(summary.free_minutes)} Free
                 </div>
-                <div className="text-[11px] text-gray-400 mt-1">
+                <div className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-1">
                   {summary.free_percentage}% available for rest/study
                 </div>
               </div>
@@ -283,13 +227,13 @@ export default function DashboardPage() {
             {/* Activities preview list */}
             <div className="space-y-2 mt-4">
               {todayActivities.length === 0 ? (
-                <div className="p-6 rounded-2xl bg-gray-900/40 border border-gray-800 text-center">
-                  <p className="text-xs text-gray-400">
+                <div className="p-6 rounded-2xl bg-white/50 dark:bg-zinc-900/20 border border-zinc-300 dark:border-zinc-800/50 text-center">
+                  <p className="text-xs text-zinc-500 dark:text-zinc-500">
                     No activities scheduled for today. Your entire day is free!
                   </p>
                   <button
                     onClick={() => setIsModalOpen(true)}
-                    className="mt-3 inline-flex items-center gap-1.5 text-xs text-indigo-400 hover:text-indigo-300 font-medium"
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs text-[#3B82F6] dark:text-[#3B82F6] hover:text-indigo-300 font-medium"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Plan your first activity</span>
@@ -308,7 +252,7 @@ export default function DashboardPage() {
                 <div className="text-center pt-2">
                   <Link
                     href="/schedule"
-                    className="text-xs font-semibold text-indigo-400 hover:text-indigo-300"
+                    className="text-xs font-semibold text-[#3B82F6] dark:text-[#3B82F6] hover:text-indigo-300"
                   >
                     View all {todayActivities.length} activities on Schedule page →
                   </Link>
@@ -320,10 +264,10 @@ export default function DashboardPage() {
           {/* Feature Modules Grid */}
           <section className="space-y-4">
             <div>
-              <h3 className="text-lg font-bold text-gray-100 tracking-tight">
+              <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
                 System Modules
               </h3>
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-zinc-500 dark:text-zinc-500">
                 Modular architecture ready for all college management features
               </p>
             </div>
@@ -334,15 +278,11 @@ export default function DashboardPage() {
                 return (
                   <div
                     key={card.title}
-                    className={`relative p-5 rounded-2xl border transition-all duration-200 backdrop-blur-md ${
-                      card.comingSoon
-                        ? 'bg-gray-900/40 border-gray-800/60 opacity-70'
-                        : 'bg-gray-900/70 border-indigo-500/30 hover:border-indigo-500/60 shadow-lg shadow-indigo-950/20'
-                    }`}
+                    className={`relative p-5 rounded-2xl border transition-all duration-200 backdrop-blur-md ${ card.comingSoon ? 'bg-white/50 dark:bg-zinc-900/20 border-gray-800/60 opacity-70' : 'bg-gray-900/70 border-indigo-500/30 hover:border-indigo-500/60 shadow-lg shadow-indigo-950/20' }`}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div
-                        className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${card.iconGradient} flex items-center justify-center text-white shadow-md`}
+                        className={`w-10 h-10 rounded-3xl bg-gradient-to-tr ${card.iconGradient} flex items-center justify-center text-zinc-900 dark:text-white shadow-md`}
                       >
                         <Icon className="w-5 h-5" />
                       </div>
@@ -351,22 +291,22 @@ export default function DashboardPage() {
                       </span>
                     </div>
 
-                    <h4 className="text-base font-bold text-gray-100">
+                    <h4 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
                       {card.title}
                     </h4>
-                    <p className="text-xs text-gray-400 mt-1 leading-relaxed">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-1 leading-relaxed">
                       {card.description}
                     </p>
 
-                    <div className="mt-4 pt-3 border-t border-gray-800/80">
+                    <div className="mt-4 pt-3 border-t border-zinc-200 dark:border-zinc-800/50">
                       {card.comingSoon ? (
-                        <span className="text-xs text-gray-400 font-medium">
+                        <span className="text-xs text-zinc-500 dark:text-zinc-500 font-medium">
                           Roadmap release
                         </span>
                       ) : (
                         <Link
                           href={card.href}
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300"
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#3B82F6] dark:text-[#3B82F6] hover:text-indigo-300"
                         >
                           <span>Manage {card.title}</span>
                           <ArrowRight className="w-3.5 h-3.5" />

@@ -122,7 +122,7 @@ export const CATEGORY_DETAILS: Record<
     color: '#6b7280', // gray-500
     bgColor: 'rgba(107, 114, 128, 0.1)',
     borderColor: 'border-gray-500/30',
-    textColor: 'text-gray-500 dark:text-gray-400',
-    badgeBg: 'bg-gray-500/10 text-gray-500 border-gray-500/20',
+    textColor: 'text-zinc-400 dark:text-zinc-600 dark:text-gray-400',
+    badgeBg: 'bg-gray-500/10 text-zinc-400 dark:text-zinc-600 border-gray-500/20',
   },
 };

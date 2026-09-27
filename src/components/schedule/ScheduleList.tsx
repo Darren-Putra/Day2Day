@@ -26,7 +26,7 @@ export function ScheduleList({
         {[1, 2, 3].map((n) => (
           <div
             key={n}
-            className="h-20 rounded-2xl bg-gray-900/40 border border-gray-800/60 animate-pulse"
+            className="h-20 rounded-2xl bg-white/50 dark:bg-zinc-900/20 border border-gray-800/60 animate-pulse"
           />
         ))}
       </div>
@@ -35,11 +35,11 @@ export function ScheduleList({
 
   if (activities.length === 0) {
     return (
-      <div className="text-center py-12 px-6 rounded-2xl bg-gray-900/40 border border-gray-800/80 backdrop-blur-md">
-        <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 mx-auto flex items-center justify-center mb-4 shadow-lg shadow-cyan-500/10">
+      <div className="text-center py-12 px-6 rounded-2xl bg-white/50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md">
+        <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-[#3B82F6] dark:text-[#3B82F6] mx-auto flex items-center justify-center mb-4 shadow-lg shadow-cyan-500/10">
           <CalendarX className="w-6 h-6" />
         </div>
-        <h3 className="text-base font-bold text-gray-200">
+        <h3 className="text-base font-bold text-zinc-800 dark:text-zinc-200">
           No activities scheduled.
         </h3>
         <p className="text-sm text-cyan-400/90 font-medium mt-1 flex items-center justify-center gap-1.5">
@@ -50,7 +50,7 @@ export function ScheduleList({
         <div className="mt-6">
           <button
             onClick={onAddClick}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs shadow-lg shadow-indigo-600/25 transition-all active:scale-95"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-3xl bg-[#1D4ED8] dark:bg-[#1D4ED8] hover:bg-[#1E3A8A] hover:dark:bg-[#1E3A8A] text-zinc-900 dark:text-white font-medium text-xs shadow-lg shadow-indigo-600/25 transition-all active:scale-95"
           >
             <Plus className="w-4 h-4" />
             <span>Add Activity</span>

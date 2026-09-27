@@ -160,7 +160,7 @@ export default function SchedulePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 flex flex-col">
       <AppSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -176,7 +176,7 @@ export default function SchedulePage() {
 
         {/* Toast Feedback */}
         {toastMessage && (
-          <div className="fixed top-20 right-6 z-50 px-4 py-2.5 rounded-xl bg-indigo-600 text-white text-xs font-semibold shadow-xl shadow-indigo-600/30 animate-in fade-in slide-in-from-top-2">
+          <div className="fixed top-20 right-6 z-50 px-4 py-2.5 rounded-3xl bg-[#1D4ED8] dark:bg-[#1D4ED8] text-zinc-900 dark:text-white text-xs font-semibold shadow-xl shadow-indigo-600/30 animate-in fade-in slide-in-from-top-2">
             {toastMessage}
           </div>
         )}
@@ -185,10 +185,10 @@ export default function SchedulePage() {
           {/* Header Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-extrabold text-white tracking-tight">
+              <h2 className="text-2xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
                 Schedule Management
               </h2>
-              <p className="text-xs text-gray-400 mt-0.5">
+              <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">
                 Manage classes, study blocks, and 24-hour daily balance
               </p>
             </div>
@@ -196,7 +196,7 @@ export default function SchedulePage() {
             <div className="flex items-center gap-2.5">
               <button
                 onClick={() => setIsFreeTimeModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 text-xs font-semibold transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-3xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-[#3B82F6] dark:text-[#3B82F6] text-xs font-semibold transition-colors"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>View Free Time Slots</span>
@@ -204,7 +204,7 @@ export default function SchedulePage() {
 
               <button
                 onClick={handleOpenCreateModal}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition-all active:scale-95"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-3xl bg-[#1D4ED8] dark:bg-[#1D4ED8] hover:bg-[#1E3A8A] hover:dark:bg-[#1E3A8A] text-zinc-900 dark:text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition-all active:scale-95"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Activity</span>
@@ -232,12 +232,12 @@ export default function SchedulePage() {
           {/* 4. Activities Timeline List */}
           <section className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-gray-100 tracking-tight">
+              <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
                 Daily Timeline ({activities.length} activities)
               </h3>
               <button
                 onClick={fetchScheduleData}
-                className="p-1.5 text-gray-400 hover:text-white rounded-lg hover:bg-gray-900 transition-colors"
+                className="p-1.5 text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-2xl hover:bg-zinc-100 hover:dark:bg-zinc-900 transition-colors"
                 title="Refresh schedule"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
