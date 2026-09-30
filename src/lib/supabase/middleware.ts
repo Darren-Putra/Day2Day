@@ -47,6 +47,24 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
+  // Determine the correct base URL
+  let baseUrl = request.nextUrl.origin;
+  const envUrl = process.env.NEXT_PUBLIC_APP_URL;
+  
+  if (envUrl && envUrl !== 'http://localhost:3000') {
+    baseUrl = envUrl;
+  } else {
+    const forwardedHost = request.headers.get('x-forwarded-host');
+    const host = request.headers.get('host');
+    const protocol = request.headers.get('x-forwarded-proto') ?? (request.nextUrl.protocol.replace(':', ''));
+    
+    if (forwardedHost) {
+      baseUrl = `${protocol}://${forwardedHost}`;
+    } else if (host) {
+      baseUrl = `${protocol}://${host}`;
+    }
+  }
+
   // Protected application routes
   const isProtectedRoute =
     pathname.startsWith('/dashboard') ||
@@ -58,16 +76,11 @@ export async function updateSession(request: NextRequest) {
   const isAuthRoute = pathname.startsWith('/auth/login');
 
   if (!user && isProtectedRoute) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/auth/login';
-    url.searchParams.set('next', pathname);
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(`${baseUrl}/auth/login?next=${pathname}`);
   }
 
   if (user && isAuthRoute) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/dashboard';
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(`${baseUrl}/dashboard`);
   }
 
   return supabaseResponse;
