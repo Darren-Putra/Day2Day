@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { ScheduleOccurrence } from '@/types/schedule';
 import { formatDuration } from '@/lib/schedule/date-utils';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Clock } from 'lucide-react';
 
 interface SchedulePieChartProps {
   occurrences: ScheduleOccurrence[];
@@ -21,15 +21,16 @@ interface ChartSlice {
   category?: string;
 }
 
+// A more premium color palette: vibrant accents that look great in both dark and light mode
 const COLOR_PALETTE = [
-  '#6366f1', // Indigo
-  '#ec4899', // Pink
-  '#10b981', // Emerald
-  '#f59e0b', // Amber
-  '#8b5cf6', // Violet
-  '#3b82f6', // Blue
-  '#14b8a6', // Teal
-  '#f43f5e', // Rose
+  '#3b82f6', // Blue 500
+  '#8b5cf6', // Violet 500
+  '#ec4899', // Pink 500
+  '#f43f5e', // Rose 500
+  '#f59e0b', // Amber 500
+  '#10b981', // Emerald 500
+  '#06b6d4', // Cyan 500
+  '#6366f1', // Indigo 500
 ];
 
 export function SchedulePieChart({
@@ -58,7 +59,7 @@ export function SchedulePieChart({
       percentage,
       color: COLOR_PALETTE[index % COLOR_PALETTE.length],
       isFreeTime: false,
-      timeRange: `${item.start}–${item.end}`,
+      timeRange: `${item.start} - ${item.end}`,
       category: item.category,
     };
   });
@@ -73,31 +74,37 @@ export function SchedulePieChart({
       title: 'Free Time',
       duration_minutes: freeMinutes,
       percentage: freePercentage,
-      color: '#0891b2', // Cyan-600
+      color: '#1e293b', // darker/muted for free time. Handled with currentColor below.
       isFreeTime: true,
     });
   }
 
   // 3. SVG Donut Arc calculations
-  const size = 260;
-  const hoverGrow = 6;
-  const padding = hoverGrow; // extra space so hover stroke is never clipped
+  const size = 320; // slightly larger
+  const strokeWidth = 28; // slightly thinner for elegance
+  const hoverGrow = 8;
+  const padding = hoverGrow + 16;
   const paddedSize = size + padding * 2;
-  const strokeWidth = 32;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 
   let accumulatedPercentage = 0;
 
   return (
-    <div className="p-6 rounded-2xl bg-white/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md flex flex-col md:flex-row items-center gap-8 transition-colors duration-300">
+    <div className="p-6 sm:p-8 rounded-[2rem] bg-white/60 dark:bg-[#0a0a0a]/60 border border-zinc-200/80 dark:border-zinc-800/60 backdrop-blur-xl flex flex-col lg:flex-row items-center gap-10 lg:gap-16 transition-colors duration-500 shadow-sm dark:shadow-2xl">
       {/* Donut Chart Visual */}
-      <div className="relative flex-shrink-0 flex items-center justify-center" style={{ width: paddedSize, height: paddedSize }}>
+      <div 
+        className="relative flex-shrink-0 flex items-center justify-center group" 
+        style={{ width: paddedSize, height: paddedSize }}
+      >
+        {/* Decorative background glow behind the chart */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-purple-500/10 to-pink-500/10 dark:from-blue-500/5 dark:via-purple-500/5 dark:to-pink-500/5 rounded-full blur-3xl -z-10 transition-opacity duration-700 opacity-50 group-hover:opacity-100" />
+        
         <svg
           width={paddedSize}
           height={paddedSize}
           viewBox={`${-padding} ${-padding} ${paddedSize} ${paddedSize}`}
-          className="transform -rotate-90"
+          className="transform -rotate-90 drop-shadow-sm dark:drop-shadow-none"
           style={{ overflow: 'visible' }}
         >
           {/* Background circle track */}
@@ -106,13 +113,18 @@ export function SchedulePieChart({
             cy={size / 2}
             r={radius}
             fill="transparent"
-            stroke="rgba(31, 41, 55, 0.6)"
+            stroke="currentColor"
+            className="text-zinc-100 dark:text-zinc-800/50 transition-colors duration-500"
             strokeWidth={strokeWidth}
           />
 
+          {/* Slices */}
           {slices.map((slice) => {
-            const strokeDasharray = `${ (slice.percentage / 100) * circumference } ${circumference}`;
-            const strokeDashoffset = `${ -(accumulatedPercentage / 100) * circumference }`;
+            // Create a small gap by reducing the slice's visual length
+            const gap = 0.5; // 0.5% gap
+            const visualPercentage = Math.max(0, slice.percentage - gap);
+            const strokeDasharray = `${(visualPercentage / 100) * circumference} ${circumference}`;
+            const strokeDashoffset = `${-(accumulatedPercentage / 100) * circumference}`;
             accumulatedPercentage += slice.percentage;
 
             const isHovered = hoveredSlice?.id === slice.id;
@@ -124,94 +136,149 @@ export function SchedulePieChart({
                 cy={size / 2}
                 r={radius}
                 fill="transparent"
-                stroke={slice.color}
+                stroke={slice.isFreeTime ? "currentColor" : slice.color}
+                className={`${slice.isFreeTime ? "text-zinc-200 dark:text-zinc-800" : ""} transition-all duration-300 ease-out cursor-pointer origin-center`}
                 strokeWidth={isHovered ? strokeWidth + hoverGrow : strokeWidth}
                 strokeDasharray={strokeDasharray}
                 strokeDashoffset={strokeDashoffset}
-                strokeLinecap="round"
-                className="transition-all duration-200 cursor-pointer"
+                strokeLinecap="butt"
                 onMouseEnter={() => setHoveredSlice(slice)}
                 onMouseLeave={() => setHoveredSlice(null)}
+                style={{
+                  filter: isHovered && !slice.isFreeTime ? `drop-shadow(0 0 10px ${slice.color}60)` : 'none',
+                  transform: isHovered ? `scale(1.02)` : 'scale(1)',
+                }}
               />
             );
           })}
         </svg>
 
         {/* Center label inside Donut */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4">
-          {hoveredSlice ? (
-            <div className="animate-in fade-in duration-150">
-              <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500 truncate block max-w-[120px]">
-                {hoveredSlice.title}
-              </span>
-              <span className="text-3xl font-medium text-zinc-900 dark:text-white font-mono mt-1">
-                {hoveredSlice.percentage}%
-              </span>
-              <span className="text-xs text-zinc-400 block font-mono font-light mt-1">
-                {formatDuration(hoveredSlice.duration_minutes)}
-              </span>
-            </div>
-          ) : (
-            <div>
-              <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500 block">
-                24 Hours
-              </span>
-              <span className="text-3xl font-medium text-zinc-900 dark:text-white font-mono mt-1">
-                {((freeMinutes / totalMinutes) * 100).toFixed(0)}%
-              </span>
-              <span className="text-[10px] uppercase tracking-widest font-medium text-[#3B82F6] flex items-center justify-center gap-1 mt-1">
-                <Sparkles className="w-3 h-3" />
-                Free Time
-              </span>
-            </div>
-          )}
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-6">
+          <div className={`transition-all duration-300 absolute flex flex-col items-center justify-center ${hoveredSlice ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            {hoveredSlice && (
+              <>
+                <div 
+                  className="w-3.5 h-3.5 rounded-full mb-3" 
+                  style={{ backgroundColor: hoveredSlice.isFreeTime ? '#a1a1aa' : hoveredSlice.color }} 
+                />
+                <span className="text-[11px] uppercase tracking-widest font-bold text-zinc-500 dark:text-zinc-400 truncate block max-w-[150px] mb-1">
+                  {hoveredSlice.title}
+                </span>
+                <span className="text-5xl font-semibold text-zinc-900 dark:text-white tracking-tighter">
+                  {hoveredSlice.percentage}%
+                </span>
+                <span className="text-xs text-zinc-500 dark:text-zinc-400 block font-medium mt-2 bg-zinc-100 dark:bg-zinc-800/60 px-3 py-1.5 rounded-full">
+                  {formatDuration(hoveredSlice.duration_minutes)}
+                </span>
+              </>
+            )}
+          </div>
+          
+          <div className={`transition-all duration-300 absolute flex flex-col items-center justify-center ${hoveredSlice ? 'opacity-0 scale-105' : 'opacity-100 scale-100'}`}>
+            <span className="text-[11px] uppercase tracking-widest font-bold text-zinc-500 dark:text-zinc-400 block mb-2">
+              Daily Balance
+            </span>
+            <span className="text-5xl font-semibold text-zinc-900 dark:text-white tracking-tighter">
+              {((freeMinutes / totalMinutes) * 100).toFixed(0)}%
+            </span>
+            <span className="text-[10px] uppercase tracking-widest font-bold text-[#3B82F6] flex items-center justify-center gap-1.5 mt-3 bg-blue-50 dark:bg-blue-900/20 px-3.5 py-1.5 rounded-full border border-blue-100 dark:border-blue-800/30">
+              <Sparkles className="w-3.5 h-3.5" />
+              Free Time
+            </span>
+          </div>
         </div>
       </div>
 
       {/* Legend & Details */}
-      <div className="flex-1 w-full space-y-3">
-        <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800/50">
-          <h3 className="text-sm font-medium text-zinc-900 dark:text-white tracking-tight">
-            24-Hour Time Distribution
-          </h3>
-          <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500">1440 min (100%)</span>
+      <div className="flex-1 w-full flex flex-col h-full lg:max-h-[380px]">
+        <div className="flex items-end justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800/60 mb-4">
+          <div>
+            <h3 className="text-lg font-semibold text-zinc-900 dark:text-white tracking-tight">
+              Time Distribution
+            </h3>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium">
+              A breakdown of your 24-hour day
+            </p>
+          </div>
+          <div className="text-right">
+            <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700">
+              1440 min
+            </span>
+          </div>
         </div>
 
-        <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-          {slices.map((slice) => (
-            <div
-              key={slice.id}
-              onMouseEnter={() => setHoveredSlice(slice)}
-              onMouseLeave={() => setHoveredSlice(null)}
-              className={`flex items-center justify-between p-2 rounded-2xl transition-all duration-300 cursor-pointer ${ hoveredSlice?.id === slice.id ? 'bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800/50' : 'hover:bg-zinc-100 dark:hover:bg-zinc-900/40 border border-transparent' }`}
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <span
-                  className="w-3 h-3 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: slice.color }}
-                />
-                <div className="min-w-0">
-                  <div className="text-xs font-medium text-zinc-700 dark:text-zinc-200 truncate group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
-                    {slice.title}
+        <div className="flex-1 overflow-y-auto pr-2 space-y-2.5">
+          {slices.map((slice) => {
+            const isHovered = hoveredSlice?.id === slice.id;
+            
+            return (
+              <div
+                key={slice.id}
+                onMouseEnter={() => setHoveredSlice(slice)}
+                onMouseLeave={() => setHoveredSlice(null)}
+                className={`group flex items-center justify-between p-3 sm:p-4 rounded-2xl transition-all duration-300 cursor-pointer ${
+                  isHovered 
+                    ? 'bg-zinc-50 dark:bg-zinc-800/80 shadow-sm border border-zinc-200 dark:border-zinc-700' 
+                    : 'bg-transparent hover:bg-zinc-50/50 dark:hover:bg-zinc-800/40 border border-transparent'
+                }`}
+              >
+                <div className="flex items-center gap-4 min-w-0 flex-1">
+                  <div 
+                    className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${isHovered ? 'scale-110' : 'scale-100'}`}
+                    style={{ 
+                      backgroundColor: slice.isFreeTime ? 'transparent' : `${slice.color}15`,
+                      border: slice.isFreeTime ? '1px dashed currentColor' : 'none',
+                      color: slice.isFreeTime ? 'var(--tw-prose-counters)' : slice.color
+                    }}
+                  >
+                    {slice.isFreeTime ? (
+                      <Sparkles className="w-4.5 h-4.5 text-zinc-400 dark:text-zinc-500" />
+                    ) : (
+                      <div className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: slice.color, filter: `drop-shadow(0 0 4px ${slice.color}80)` }} />
+                    )}
                   </div>
-                  {slice.timeRange && (
-                    <div className="text-[10px] uppercase tracking-widest font-medium text-zinc-500 font-mono mt-0.5">
-                      {slice.timeRange}
+                  
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2.5">
+                      <div className={`text-sm font-semibold truncate transition-colors ${
+                        isHovered ? 'text-zinc-900 dark:text-white' : 'text-zinc-700 dark:text-zinc-200'
+                      }`}>
+                        {slice.title}
+                      </div>
+                      {slice.category && (
+                         <span className="hidden sm:inline-flex px-1.5 py-0.5 rounded md:rounded-md text-[9px] font-bold uppercase tracking-wider bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
+                           {slice.category.replace(/_/g, ' ')}
+                         </span>
+                      )}
                     </div>
-                  )}
+                    
+                    {slice.timeRange && !slice.isFreeTime && (
+                      <div className="flex items-center gap-1.5 text-[11px] font-medium text-zinc-500 dark:text-zinc-400 mt-1.5">
+                        <Clock className="w-3 h-3" />
+                        {slice.timeRange}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <div className="text-right flex-shrink-0 ml-3">
-                <div className="text-xs font-medium font-mono text-zinc-700 dark:text-zinc-200">
-                  {formatDuration(slice.duration_minutes)}
-                </div>
-                <div className="text-[10px] font-medium font-mono text-[#3B82F6] mt-0.5">
-                  {slice.percentage}%
+                <div className="text-right flex-shrink-0 ml-4 flex flex-col items-end">
+                  <div className={`text-sm font-semibold tabular-nums transition-colors ${
+                    isHovered ? 'text-zinc-900 dark:text-white' : 'text-zinc-700 dark:text-zinc-300'
+                  }`}>
+                    {formatDuration(slice.duration_minutes)}
+                  </div>
+                  <div className={`text-[11px] font-bold tabular-nums mt-1 px-1.5 py-0.5 rounded-full ${
+                    slice.isFreeTime 
+                      ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' 
+                      : 'bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400'
+                  }`}>
+                    {slice.percentage}%
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
