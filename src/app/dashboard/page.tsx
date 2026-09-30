@@ -132,8 +132,8 @@ export default function DashboardPage() {
       icon: CheckSquare,
       href: '#',
       status: 'Coming Soon',
-      statusColor: 'bg-zinc-900/50 text-zinc-500 border border-zinc-800',
-      iconGradient: 'from-zinc-800 to-zinc-900',
+      statusColor: 'bg-zinc-100 dark:bg-zinc-900/50 text-zinc-500 border border-zinc-200 dark:border-zinc-800',
+      iconGradient: 'from-zinc-400 dark:from-zinc-800 to-zinc-500 dark:to-zinc-900',
       comingSoon: true,
     },
     {
@@ -151,8 +151,8 @@ export default function DashboardPage() {
       icon: FileText,
       href: '#',
       status: 'Coming Soon',
-      statusColor: 'bg-zinc-900/50 text-zinc-500 border border-zinc-800',
-      iconGradient: 'from-zinc-800 to-zinc-900',
+      statusColor: 'bg-zinc-100 dark:bg-zinc-900/50 text-zinc-500 border border-zinc-200 dark:border-zinc-800',
+      iconGradient: 'from-zinc-400 dark:from-zinc-800 to-zinc-500 dark:to-zinc-900',
       comingSoon: true,
     },
     {
@@ -161,8 +161,8 @@ export default function DashboardPage() {
       icon: Calendar,
       href: '#',
       status: 'Coming Soon',
-      statusColor: 'bg-zinc-900/50 text-zinc-500 border border-zinc-800',
-      iconGradient: 'from-zinc-800 to-zinc-900',
+      statusColor: 'bg-zinc-100 dark:bg-zinc-900/50 text-zinc-500 border border-zinc-200 dark:border-zinc-800',
+      iconGradient: 'from-zinc-400 dark:from-zinc-800 to-zinc-500 dark:to-zinc-900',
       comingSoon: true,
     },
     {
@@ -171,12 +171,68 @@ export default function DashboardPage() {
       icon: BarChart3,
       href: '#',
       status: 'Coming Soon',
-      statusColor: 'bg-zinc-900/50 text-zinc-500 border border-zinc-800',
-      iconGradient: 'from-zinc-800 to-zinc-900', comingSoon: true, }, ]; return ( <div className="min-h-screen bg-black text-zinc-100 flex flex-col"> <AppSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} /> <div className="lg:pl-64 flex flex-col flex-1"> <AppNavbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} userName={userName} userEmail={userEmail} userAvatar={userAvatar} /> <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full space-y-8"> {/* Greeting Hero */} <div className="relative overflow-hidden rounded-2xl p-6 sm:p-8 bg-zinc-900/40 border border-zinc-800/50 shadow-2xl backdrop-blur-xl"> <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-[#1E3A8A]/10 rounded-full blur-3xl pointer-events-none" /> <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6"> <div> <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1E3A8A]/25 border border-[#1E3A8A]/60 text-[#3B82F6] text-[10px] uppercase tracking-widest font-medium mb-3"> <Sparkles className="w-3.5 h-3.5 text-[#3B82F6]" /> <span>College Management Workspace</span> </div> <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-white"> {greeting}, {userName} </h2> <p className="text-sm font-light leading-relaxed text-zinc-400 mt-1 max-w-xl"> Here is your college overview for today in{' '} <span className="text-[#3B82F6] font-mono font-medium"> Asia/Makassar </span> . </p> </div> {/* Schedule CTA */} <div className="flex-shrink-0 flex items-center gap-3"> <Link href="/schedule" className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#1E3A8A] hover:bg-[#1E40AF] active:scale-95 text-white font-medium text-xs sm:text-sm shadow-xl shadow-blue-900/20 transition-all duration-300" > <CalendarClock className="w-4 h-4" /> <span>Open Schedule</span> <ArrowRight className="w-4 h-4" /> </Link> </div> </div> </div> {/* Today's Schedule Snapshot */}
+      statusColor: 'bg-zinc-100 dark:bg-zinc-900/50 text-zinc-500 border border-zinc-200 dark:border-zinc-800',
+      iconGradient: 'from-zinc-400 dark:from-zinc-800 to-zinc-500 dark:to-zinc-900',
+      comingSoon: true,
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#f8f9fc] dark:bg-black text-zinc-800 dark:text-zinc-100 flex flex-col transition-colors duration-300">
+      <AppSidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+
+      <div className="lg:pl-64 flex flex-col flex-1">
+        <AppNavbar
+          onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
+          userName={userName}
+          userEmail={userEmail}
+          userAvatar={userAvatar}
+        />
+
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full space-y-8">
+          {/* Greeting Hero */}
+          <div className="relative overflow-hidden rounded-2xl p-6 sm:p-8 bg-white/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/50 shadow-2xl backdrop-blur-xl transition-colors duration-300">
+            <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-blue-100/50 dark:bg-[#1E3A8A]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-[#1E3A8A]/25 border border-blue-200 dark:border-[#1E3A8A]/60 text-[#3B82F6] text-[10px] uppercase tracking-widest font-medium mb-3">
+                  <Sparkles className="w-3.5 h-3.5 text-[#3B82F6]" />
+                  <span>College Management Workspace</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-zinc-900 dark:text-white">
+                  {greeting}, {userName}
+                </h2>
+                <p className="text-sm font-light leading-relaxed text-zinc-500 dark:text-zinc-400 mt-1 max-w-xl">
+                  Here is your college overview for today in{' '}
+                  <span className="text-[#3B82F6] font-mono font-medium">
+                    Asia/Makassar
+                  </span>
+                  .
+                </p>
+              </div>
+
+              {/* Schedule CTA */}
+              <div className="flex-shrink-0 flex items-center gap-3">
+                <Link
+                  href="/schedule"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#1E3A8A] hover:bg-[#1E40AF] active:scale-95 text-white font-medium text-xs sm:text-sm shadow-xl shadow-blue-900/20 transition-all duration-300"
+                >
+                  <CalendarClock className="w-4 h-4" />
+                  <span>Open Schedule</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Today's Schedule Snapshot */}
           <section className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-medium tracking-tight text-white">
+                <h3 className="text-lg font-medium tracking-tight text-zinc-900 dark:text-white">
                   Today&apos;s Schedule
                 </h3>
                 <p className="text-[11px] uppercase tracking-widest font-medium text-zinc-500 mt-1">
@@ -186,7 +242,7 @@ export default function DashboardPage() {
 
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-xs font-medium text-zinc-400 hover:text-[#3B82F6] hover:bg-[#1E3A8A]/25 hover:border-[#1E3A8A]/60 transition-all duration-300 active:scale-95"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/50 text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-[#3B82F6] hover:bg-blue-50 dark:hover:bg-[#1E3A8A]/25 hover:border-blue-200 dark:hover:border-[#1E3A8A]/60 transition-all duration-300 active:scale-95"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Activity</span>
@@ -195,30 +251,30 @@ export default function DashboardPage() {
 
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 rounded-2xl bg-zinc-900/30 border border-zinc-800/50 backdrop-blur-md hover:bg-zinc-900/50 hover:border-[#1E3A8A]/60 transition-all duration-300">
+              <div className="p-4 rounded-2xl bg-white/70 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md hover:bg-white dark:hover:bg-zinc-900/50 hover:border-blue-200 dark:hover:border-[#1E3A8A]/60 transition-all duration-300">
                 <span className="text-[11px] uppercase tracking-widest font-medium text-zinc-500">Activities Planned</span>
-                <div className="mt-2 text-3xl font-medium font-mono text-white">
+                <div className="mt-2 text-3xl font-medium font-mono text-zinc-900 dark:text-white">
                   {summary.activity_count}
                 </div>
-                <div className="text-xs text-zinc-400 font-light mt-1">Activities today</div>
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 font-light mt-1">Activities today</div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-zinc-900/30 border border-zinc-800/50 backdrop-blur-md hover:bg-zinc-900/50 hover:border-[#1E3A8A]/60 transition-all duration-300">
+              <div className="p-4 rounded-2xl bg-white/70 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md hover:bg-white dark:hover:bg-zinc-900/50 hover:border-blue-200 dark:hover:border-[#1E3A8A]/60 transition-all duration-300">
                 <span className="text-[11px] uppercase tracking-widest font-medium text-[#3B82F6]">Scheduled Time</span>
-                <div className="mt-2 text-3xl font-medium font-mono text-white">
+                <div className="mt-2 text-3xl font-medium font-mono text-zinc-900 dark:text-white">
                   {formatDuration(summary.scheduled_minutes)}
                 </div>
-                <div className="text-xs text-zinc-400 font-light mt-1">
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 font-light mt-1">
                   {summary.scheduled_percentage}% of your day
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-zinc-900/30 border border-zinc-800/50 backdrop-blur-md hover:bg-zinc-900/50 hover:border-[#1E3A8A]/60 transition-all duration-300">
+              <div className="p-4 rounded-2xl bg-white/70 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md hover:bg-white dark:hover:bg-zinc-900/50 hover:border-blue-200 dark:hover:border-[#1E3A8A]/60 transition-all duration-300">
                 <span className="text-[11px] uppercase tracking-widest font-medium text-zinc-500">Free Time</span>
-                <div className="mt-2 text-3xl font-medium font-mono text-white">
+                <div className="mt-2 text-3xl font-medium font-mono text-zinc-900 dark:text-white">
                   {formatDuration(summary.free_minutes)}
                 </div>
-                <div className="text-xs text-zinc-400 font-light mt-1">
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 font-light mt-1">
                   {summary.free_percentage}% available for rest
                 </div>
               </div>
@@ -227,8 +283,8 @@ export default function DashboardPage() {
             {/* Activities preview list */}
             <div className="space-y-2 mt-4">
               {todayActivities.length === 0 ? (
-                <div className="p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/50 text-center">
-                  <p className="text-sm font-light text-zinc-400">
+                <div className="p-6 rounded-2xl bg-white/70 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 text-center transition-colors duration-300">
+                  <p className="text-sm font-light text-zinc-500 dark:text-zinc-400">
                     No activities scheduled for today. Your entire day is free!
                   </p>
                   <button
@@ -252,7 +308,7 @@ export default function DashboardPage() {
                 <div className="text-center pt-2">
                   <Link
                     href="/schedule"
-                    className="text-xs font-medium text-[#3B82F6] hover:text-white transition-colors duration-300"
+                    className="text-xs font-medium text-[#3B82F6] hover:text-zinc-900 dark:hover:text-white transition-colors duration-300"
                   >
                     View all {todayActivities.length} activities on Schedule page →
                   </Link>
@@ -264,7 +320,7 @@ export default function DashboardPage() {
           {/* Feature Modules Grid */}
           <section className="space-y-4">
             <div>
-              <h3 className="text-lg font-medium tracking-tight text-white">
+              <h3 className="text-lg font-medium tracking-tight text-zinc-900 dark:text-white">
                 System Modules
               </h3>
               <p className="text-[11px] uppercase tracking-widest font-medium text-zinc-500 mt-1">
@@ -278,7 +334,7 @@ export default function DashboardPage() {
                 return (
                   <div
                     key={card.title}
-                    className={`relative p-5 rounded-2xl border transition-all duration-300 backdrop-blur-md group ${ card.comingSoon ? 'bg-zinc-900/20 border-zinc-800/30 opacity-70' : 'bg-zinc-900/40 border-zinc-800/50 hover:bg-zinc-900/50 hover:border-[#1E3A8A]/60' }`}
+                    className={`relative p-5 rounded-2xl border transition-all duration-300 backdrop-blur-md group ${ card.comingSoon ? 'bg-zinc-50 dark:bg-zinc-900/20 border-zinc-200 dark:border-zinc-800/30 opacity-70' : 'bg-white/70 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800/50 hover:bg-white dark:hover:bg-zinc-900/50 hover:border-blue-200 dark:hover:border-[#1E3A8A]/60' }`}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div
@@ -291,14 +347,14 @@ export default function DashboardPage() {
                       </span>
                     </div>
 
-                    <h4 className="text-base font-medium tracking-tight text-white group-hover:text-[#3B82F6] transition-colors duration-300">
+                    <h4 className="text-base font-medium tracking-tight text-zinc-900 dark:text-white group-hover:text-[#3B82F6] transition-colors duration-300">
                       {card.title}
                     </h4>
-                    <p className="text-xs font-light text-zinc-400 mt-1 leading-relaxed">
+                    <p className="text-xs font-light text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
                       {card.description}
                     </p>
 
-                    <div className="mt-4 pt-3 border-t border-zinc-800/50">
+                    <div className="mt-4 pt-3 border-t border-zinc-200 dark:border-zinc-800/50">
                       {card.comingSoon ? (
                         <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500">
                           Roadmap release
@@ -306,7 +362,7 @@ export default function DashboardPage() {
                       ) : (
                         <Link
                           href={card.href}
-                          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#3B82F6] group-hover:text-white transition-colors duration-300"
+                          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#3B82F6] group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-300"
                         >
                           <span>Manage {card.title}</span>
                           <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />

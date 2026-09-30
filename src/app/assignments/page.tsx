@@ -165,7 +165,7 @@ export default function AssignmentsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-black text-zinc-100 flex flex-col">
+    <div className="min-h-screen bg-[#f8f9fc] dark:bg-black text-zinc-800 dark:text-zinc-100 flex flex-col transition-colors duration-300">
       <AppSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -191,7 +191,7 @@ export default function AssignmentsPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-3">
-                <h2 className="text-2xl font-medium text-white tracking-tight">
+                <h2 className="text-2xl font-medium text-zinc-900 dark:text-white tracking-tight">
                   Assignments & Deadlines
                 </h2>
                 <span className="text-[10px] uppercase tracking-widest font-medium px-2 py-0.5 rounded-full bg-[#1E3A8A]/25 text-[#3B82F6] border border-[#1E3A8A]/60">
@@ -206,7 +206,7 @@ export default function AssignmentsPage() {
             <div className="flex items-center gap-2.5">
               <button
                 onClick={fetchAssignments}
-                className="p-2 text-zinc-500 hover:text-white rounded-full hover:bg-zinc-900/50 transition-colors duration-300"
+                className="p-2 text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900/50 transition-colors duration-300"
                 title="Refresh"
               >
                 <RefreshCw className="w-4 h-4" />
@@ -226,85 +226,85 @@ export default function AssignmentsPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
             <button
               onClick={() => setActiveTab('active')}
-              className={`p-4 rounded-2xl border text-left transition-all duration-300 backdrop-blur-md group ${ activeTab === 'active' ? 'bg-[#1E3A8A]/25 border-[#1E3A8A]/60 shadow-lg shadow-blue-900/20' : 'bg-zinc-900/40 border-zinc-800/50 hover:border-[#1E3A8A]/60' }`}
+              className={`p-4 rounded-2xl border text-left transition-all duration-300 backdrop-blur-md group ${ activeTab === 'active' ? 'bg-blue-50 dark:bg-[#1E3A8A]/25 border-blue-200 dark:border-[#1E3A8A]/60 shadow-lg shadow-blue-900/10 dark:shadow-blue-900/20' : 'bg-white/70 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800/50 hover:border-blue-200 dark:hover:border-[#1E3A8A]/60' }`}
             >
               <div className="flex items-center justify-between">
                 <span className={`text-[10px] uppercase tracking-widest font-medium transition-colors ${activeTab === 'active' ? 'text-[#3B82F6]' : 'text-zinc-500 group-hover:text-[#3B82F6]'}`}>Active / Upcoming</span>
                 <Clock className={`w-4 h-4 transition-colors ${activeTab === 'active' ? 'text-[#3B82F6]' : 'text-zinc-500 group-hover:text-[#3B82F6]'}`} />
               </div>
-              <div className="text-3xl font-medium font-mono text-white mt-2">
+              <div className="text-3xl font-medium font-mono text-zinc-900 dark:text-white mt-2">
                 {summary.active}
               </div>
             </button>
 
             <button
               onClick={() => setActiveTab('overdue')}
-              className={`p-4 rounded-2xl border text-left transition-all duration-300 backdrop-blur-md group ${ activeTab === 'overdue' ? 'bg-red-950/40 border-red-900/60 shadow-lg shadow-red-900/20' : 'bg-zinc-900/40 border-zinc-800/50 hover:border-red-900/60' }`}
+              className={`p-4 rounded-2xl border text-left transition-all duration-300 backdrop-blur-md group ${ activeTab === 'overdue' ? 'bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900/60 shadow-lg shadow-red-900/10 dark:shadow-red-900/20' : 'bg-white/70 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800/50 hover:border-red-200 dark:hover:border-red-900/60' }`}
             >
               <div className="flex items-center justify-between">
                 <span className={`text-[10px] uppercase tracking-widest font-medium transition-colors ${activeTab === 'overdue' ? 'text-red-400' : 'text-zinc-500 group-hover:text-red-400'}`}>Overdue (Terlewat)</span>
                 <AlertTriangle className={`w-4 h-4 transition-colors ${activeTab === 'overdue' ? 'text-red-400' : 'text-zinc-500 group-hover:text-red-400'}`} />
               </div>
-              <div className="text-3xl font-medium font-mono text-white mt-2">
+              <div className="text-3xl font-medium font-mono text-zinc-900 dark:text-white mt-2">
                 {summary.overdue}
               </div>
             </button>
 
             <button
               onClick={() => setActiveTab('completed')}
-              className={`p-4 rounded-2xl border text-left transition-all duration-300 backdrop-blur-md group ${ activeTab === 'completed' ? 'bg-emerald-950/40 border-emerald-900/60 shadow-lg shadow-emerald-900/20' : 'bg-zinc-900/40 border-zinc-800/50 hover:border-emerald-900/60' }`}
+              className={`p-4 rounded-2xl border text-left transition-all duration-300 backdrop-blur-md group ${ activeTab === 'completed' ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900/60 shadow-lg shadow-emerald-900/10 dark:shadow-emerald-900/20' : 'bg-white/70 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800/50 hover:border-emerald-200 dark:hover:border-emerald-900/60' }`}
             >
               <div className="flex items-center justify-between">
                 <span className={`text-[10px] uppercase tracking-widest font-medium transition-colors ${activeTab === 'completed' ? 'text-emerald-400' : 'text-zinc-500 group-hover:text-emerald-400'}`}>Completed (Selesai)</span>
                 <CheckCircle2 className={`w-4 h-4 transition-colors ${activeTab === 'completed' ? 'text-emerald-400' : 'text-zinc-500 group-hover:text-emerald-400'}`} />
               </div>
-              <div className="text-3xl font-medium font-mono text-white mt-2">
+              <div className="text-3xl font-medium font-mono text-zinc-900 dark:text-white mt-2">
                 {summary.completed}
               </div>
             </button>
 
             <button
               onClick={() => setActiveTab('all')}
-              className={`p-4 rounded-2xl border text-left transition-all duration-300 backdrop-blur-md group ${ activeTab === 'all' ? 'bg-zinc-800/40 border-zinc-700/60 shadow-lg shadow-zinc-900/20' : 'bg-zinc-900/40 border-zinc-800/50 hover:border-zinc-700/60' }`}
+              className={`p-4 rounded-2xl border text-left transition-all duration-300 backdrop-blur-md group ${ activeTab === 'all' ? 'bg-zinc-100 dark:bg-zinc-800/40 border-zinc-300 dark:border-zinc-700/60 shadow-lg shadow-zinc-900/10 dark:shadow-zinc-900/20' : 'bg-white/70 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700/60' }`}
             >
               <div className="flex items-center justify-between">
                 <span className={`text-[10px] uppercase tracking-widest font-medium transition-colors ${activeTab === 'all' ? 'text-zinc-300' : 'text-zinc-500 group-hover:text-zinc-300'}`}>Total Assignments</span>
                 <FolderArchive className={`w-4 h-4 transition-colors ${activeTab === 'all' ? 'text-zinc-300' : 'text-zinc-500 group-hover:text-zinc-300'}`} />
               </div>
-              <div className="text-3xl font-medium font-mono text-white mt-2">
+              <div className="text-3xl font-medium font-mono text-zinc-900 dark:text-white mt-2">
                 {summary.total}
               </div>
             </button>
           </div>
 
           {/* Filter & Search Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-zinc-900/40 border border-zinc-800/50 rounded-2xl backdrop-blur-md">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/50 rounded-2xl backdrop-blur-md transition-colors duration-300">
             {/* View Tabs */}
             <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
               <button
                 onClick={() => setActiveTab('active')}
-                className={`px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest font-medium whitespace-nowrap transition-colors duration-300 ${ activeTab === 'active' ? 'bg-[#1E3A8A]/25 text-[#3B82F6] border border-[#1E3A8A]/60' : 'text-zinc-500 border border-transparent hover:text-white hover:bg-zinc-900/50' }`}
+                className={`px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest font-medium whitespace-nowrap transition-colors duration-300 ${ activeTab === 'active' ? 'bg-blue-50 dark:bg-[#1E3A8A]/25 text-[#3B82F6] border border-blue-200 dark:border-[#1E3A8A]/60' : 'text-zinc-500 border border-transparent hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900/50' }`}
               >
                 Active & Upcoming ({summary.active})
               </button>
 
               <button
                 onClick={() => setActiveTab('overdue')}
-                className={`px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest font-medium whitespace-nowrap transition-colors duration-300 ${ activeTab === 'overdue' ? 'bg-red-950/40 text-red-400 border border-red-900/60' : 'text-zinc-500 border border-transparent hover:text-white hover:bg-zinc-900/50' }`}
+                className={`px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest font-medium whitespace-nowrap transition-colors duration-300 ${ activeTab === 'overdue' ? 'bg-red-50 dark:bg-red-950/40 text-red-500 dark:text-red-400 border border-red-200 dark:border-red-900/60' : 'text-zinc-500 border border-transparent hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900/50' }`}
               >
                 Overdue ({summary.overdue})
               </button>
 
               <button
                 onClick={() => setActiveTab('completed')}
-                className={`px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest font-medium whitespace-nowrap transition-colors duration-300 ${ activeTab === 'completed' ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-900/60' : 'text-zinc-500 border border-transparent hover:text-white hover:bg-zinc-900/50' }`}
+                className={`px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest font-medium whitespace-nowrap transition-colors duration-300 ${ activeTab === 'completed' ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-500 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/60' : 'text-zinc-500 border border-transparent hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900/50' }`}
               >
                 History ({summary.completed})
               </button>
 
               <button
                 onClick={() => setActiveTab('all')}
-                className={`px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest font-medium whitespace-nowrap transition-colors duration-300 ${ activeTab === 'all' ? 'bg-zinc-800/40 text-zinc-300 border border-zinc-700/60' : 'text-zinc-500 border border-transparent hover:text-white hover:bg-zinc-900/50' }`}
+                className={`px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest font-medium whitespace-nowrap transition-colors duration-300 ${ activeTab === 'all' ? 'bg-zinc-100 dark:bg-zinc-800/40 text-zinc-700 dark:text-zinc-300 border border-zinc-300 dark:border-zinc-700/60' : 'text-zinc-500 border border-transparent hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900/50' }`}
               >
                 All ({summary.total})
               </button>
@@ -318,7 +318,7 @@ export default function AssignmentsPage() {
                 placeholder="Search title or course..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 pr-4 py-2 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-[#1E3A8A] transition-colors duration-300"
+                className="w-full pl-8 pr-4 py-2 rounded-full bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/50 text-xs text-zinc-800 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:border-[#1E3A8A] transition-colors duration-300"
               />
             </div>
           </div>
@@ -330,18 +330,18 @@ export default function AssignmentsPage() {
                 {[1, 2, 3].map((n) => (
                   <div
                     key={n}
-                    className="h-24 rounded-2xl bg-white/50 bg-zinc-900/20 border border-gray-800/60 animate-pulse"
+                    className="h-24 rounded-2xl bg-zinc-100 dark:bg-zinc-900/20 border border-zinc-200 dark:border-gray-800/60 animate-pulse"
                   />
                 ))}
               </div>
             ) : filteredList.length === 0 ? (
-              <div className="text-center py-12 px-6 rounded-2xl bg-white/50 bg-zinc-900/20 border border-zinc-800/50 backdrop-blur-md">
+              <div className="text-center py-12 px-6 rounded-2xl bg-white/70 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md transition-colors duration-300">
                 {activeTab === 'active' ? (
                   <>
                     <div className="w-12 h-12 rounded-2xl bg-[#1E3A8A]/10 border border-[#1E3A8A]/30 text-[#3B82F6] mx-auto flex items-center justify-center mb-3">
                       <Sparkles className="w-6 h-6" />
                     </div>
-                    <h3 className="text-base font-medium text-white tracking-tight">
+                    <h3 className="text-base font-medium text-zinc-900 dark:text-white tracking-tight">
                       No active assignments.
                     </h3>
                     <p className="text-xs font-light text-zinc-400 mt-1">
@@ -353,7 +353,7 @@ export default function AssignmentsPage() {
                     <div className="w-12 h-12 rounded-2xl bg-emerald-950/40 border border-emerald-900/60 text-emerald-400 mx-auto flex items-center justify-center mb-3">
                       <CheckCircle2 className="w-6 h-6" />
                     </div>
-                    <h3 className="text-base font-medium text-white tracking-tight">
+                    <h3 className="text-base font-medium text-zinc-900 dark:text-white tracking-tight">
                       No overdue assignments!
                     </h3>
                     <p className="text-xs font-light text-zinc-400 mt-1">
@@ -365,7 +365,7 @@ export default function AssignmentsPage() {
                     <div className="w-12 h-12 rounded-2xl bg-zinc-900/40 border border-zinc-800/50 text-zinc-500 mx-auto flex items-center justify-center mb-3">
                       <FolderArchive className="w-6 h-6" />
                     </div>
-                    <h3 className="text-base font-medium text-white tracking-tight">
+                    <h3 className="text-base font-medium text-zinc-900 dark:text-white tracking-tight">
                       No completed history yet.
                     </h3>
                     <p className="text-xs font-light text-zinc-400 mt-1">

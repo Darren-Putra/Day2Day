@@ -90,7 +90,7 @@ export function SchedulePieChart({
   let accumulatedPercentage = 0;
 
   return (
-    <div className="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/50 backdrop-blur-md flex flex-col md:flex-row items-center gap-8">
+    <div className="p-6 rounded-2xl bg-white/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md flex flex-col md:flex-row items-center gap-8 transition-colors duration-300">
       {/* Donut Chart Visual */}
       <div className="relative flex-shrink-0 flex items-center justify-center" style={{ width: paddedSize, height: paddedSize }}>
         <svg
@@ -144,7 +144,7 @@ export function SchedulePieChart({
               <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500 truncate block max-w-[120px]">
                 {hoveredSlice.title}
               </span>
-              <span className="text-3xl font-medium text-white font-mono mt-1">
+              <span className="text-3xl font-medium text-zinc-900 dark:text-white font-mono mt-1">
                 {hoveredSlice.percentage}%
               </span>
               <span className="text-xs text-zinc-400 block font-mono font-light mt-1">
@@ -156,7 +156,7 @@ export function SchedulePieChart({
               <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500 block">
                 24 Hours
               </span>
-              <span className="text-3xl font-medium text-white font-mono mt-1">
+              <span className="text-3xl font-medium text-zinc-900 dark:text-white font-mono mt-1">
                 {((freeMinutes / totalMinutes) * 100).toFixed(0)}%
               </span>
               <span className="text-[10px] uppercase tracking-widest font-medium text-[#3B82F6] flex items-center justify-center gap-1 mt-1">
@@ -170,8 +170,8 @@ export function SchedulePieChart({
 
       {/* Legend & Details */}
       <div className="flex-1 w-full space-y-3">
-        <div className="flex items-center justify-between pb-3 border-b border-zinc-800/50">
-          <h3 className="text-sm font-medium text-white tracking-tight">
+        <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800/50">
+          <h3 className="text-sm font-medium text-zinc-900 dark:text-white tracking-tight">
             24-Hour Time Distribution
           </h3>
           <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500">1440 min (100%)</span>
@@ -183,7 +183,7 @@ export function SchedulePieChart({
               key={slice.id}
               onMouseEnter={() => setHoveredSlice(slice)}
               onMouseLeave={() => setHoveredSlice(null)}
-              className={`flex items-center justify-between p-2 rounded-2xl transition-all duration-300 cursor-pointer ${ hoveredSlice?.id === slice.id ? 'bg-zinc-900/50 border border-zinc-800/50' : 'hover:bg-zinc-900/40 border border-transparent' }`}
+              className={`flex items-center justify-between p-2 rounded-2xl transition-all duration-300 cursor-pointer ${ hoveredSlice?.id === slice.id ? 'bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800/50' : 'hover:bg-zinc-100 dark:hover:bg-zinc-900/40 border border-transparent' }`}
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span
@@ -191,7 +191,7 @@ export function SchedulePieChart({
                   style={{ backgroundColor: slice.color }}
                 />
                 <div className="min-w-0">
-                  <div className="text-xs font-medium text-zinc-200 truncate group-hover:text-white transition-colors">
+                  <div className="text-xs font-medium text-zinc-700 dark:text-zinc-200 truncate group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
                     {slice.title}
                   </div>
                   {slice.timeRange && (
@@ -203,7 +203,7 @@ export function SchedulePieChart({
               </div>
 
               <div className="text-right flex-shrink-0 ml-3">
-                <div className="text-xs font-medium font-mono text-zinc-200">
+                <div className="text-xs font-medium font-mono text-zinc-700 dark:text-zinc-200">
                   {formatDuration(slice.duration_minutes)}
                 </div>
                 <div className="text-[10px] font-medium font-mono text-[#3B82F6] mt-0.5">

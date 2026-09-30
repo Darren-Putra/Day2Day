@@ -90,18 +90,18 @@ export function AppSidebar({ isOpen = false, onClose }: SidebarProps) {
       )}
 
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-64 flex flex-col bg-zinc-900/30 border-r border-zinc-800/50 backdrop-blur-xl transition-transform duration-300 lg:translate-x-0 ${ isOpen ? 'translate-x-0' : '-translate-x-full' }`}
+        className={`fixed top-0 bottom-0 left-0 z-50 w-64 flex flex-col bg-white/80 dark:bg-zinc-900/30 border-r border-zinc-200 dark:border-zinc-800/50 backdrop-blur-xl transition-transform duration-300 lg:translate-x-0 ${ isOpen ? 'translate-x-0' : '-translate-x-full' }`}
       >
         {/* Brand header */}
-        <div className="flex items-center gap-3 px-6 h-16 border-b border-zinc-800/50">
+        <div className="flex items-center gap-3 px-6 h-16 border-b border-zinc-200 dark:border-zinc-800/50">
           <div className="w-9 h-9 rounded-full bg-[#1E3A8A] flex items-center justify-center shadow-md shadow-blue-900/20">
             <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-lg tracking-tight text-white">
+            <h1 className="font-bold text-lg tracking-tight text-zinc-900 dark:text-white">
               Day2Day
             </h1>
-            <p className="text-[10px] text-zinc-400 font-medium tracking-widest uppercase">
+            <p className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium tracking-widest uppercase">
               College Management
             </p>
           </div>
@@ -109,7 +109,7 @@ export function AppSidebar({ isOpen = false, onClose }: SidebarProps) {
 
         {/* Navigation list */}
         <nav className="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto">
-          <div className="px-3 pb-2 text-[11px] font-medium uppercase tracking-widest text-zinc-500">
+          <div className="px-3 pb-2 text-[11px] font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
             Workspace
           </div>
 
@@ -122,10 +122,10 @@ export function AppSidebar({ isOpen = false, onClose }: SidebarProps) {
                   className="flex items-center justify-between px-3 py-2.5 rounded-full text-sm font-medium text-zinc-400 cursor-not-allowed select-none opacity-60 hover:opacity-80 transition-opacity"
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className="w-4 h-4 text-zinc-500" />
+                    <Icon className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
                     <span>{item.name}</span>
                   </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800/50 text-zinc-500 font-medium tracking-widest uppercase">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500 font-medium tracking-widest uppercase">
                     Soon
                   </span>
                 </div>
@@ -137,11 +137,11 @@ export function AppSidebar({ isOpen = false, onClose }: SidebarProps) {
                 key={item.name}
                 href={item.href}
                 onClick={onClose}
-                className={`flex items-center justify-between px-3 py-2.5 rounded-full text-sm font-medium transition-all duration-300 group ${ item.active ? 'bg-[#1E3A8A]/25 text-[#3B82F6] border border-[#1E3A8A]/60 shadow-sm' : 'text-zinc-400 hover:text-white hover:bg-zinc-900/50 border border-transparent hover:border-[#1E3A8A]/60' }`}
+                className={`flex items-center justify-between px-3 py-2.5 rounded-full text-sm font-medium transition-all duration-300 group ${ item.active ? 'bg-[#1E3A8A]/25 text-[#3B82F6] border border-[#1E3A8A]/60 shadow-sm' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900/50 border border-transparent hover:border-zinc-200 dark:hover:border-[#1E3A8A]/60' }`}
               >
                 <div className="flex items-center gap-3">
                   <Icon
-                    className={`w-4 h-4 transition-transform duration-300 group-hover:scale-110 ${ item.active ? 'text-[#3B82F6]' : 'text-zinc-500 group-hover:text-white' }`}
+                    className={`w-4 h-4 transition-transform duration-300 group-hover:scale-110 ${ item.active ? 'text-[#3B82F6]' : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white' }`}
                   />
                   <span>{item.name}</span>
                 </div>
@@ -158,17 +158,17 @@ export function AppSidebar({ isOpen = false, onClose }: SidebarProps) {
         </nav>
 
         {/* Bottom footer links */}
-        <div className="p-3 border-t border-zinc-800/50 space-y-2">
+        <div className="p-3 border-t border-zinc-200 dark:border-zinc-800/50 space-y-2">
           <Link
             href="/api/docs"
             target="_blank"
-            className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-zinc-500 hover:text-[#3B82F6] rounded-full hover:bg-zinc-900/50 transition-colors"
+            className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-zinc-500 hover:text-[#3B82F6] rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900/50 transition-colors"
           >
             <Code2 className="w-3.5 h-3.5 text-[#3B82F6]" />
             <span>OpenAPI Spec & Docs</span>
           </Link>
 
-          <div className="px-3 py-2 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-[11px] text-zinc-500 flex items-center justify-between">
+          <div className="px-3 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/50 text-[11px] text-zinc-500 flex items-center justify-between">
             <span>Timezone:</span>
             <span className="font-mono text-[#3B82F6] font-medium">Asia/Makassar</span>
           </div>

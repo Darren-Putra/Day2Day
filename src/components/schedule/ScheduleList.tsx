@@ -26,7 +26,7 @@ export function ScheduleList({
         {[1, 2, 3].map((n) => (
           <div
             key={n}
-            className="h-24 rounded-2xl bg-zinc-900/20 border border-zinc-800/50 animate-pulse"
+            className="h-24 rounded-2xl bg-zinc-100 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800/50 animate-pulse"
           />
         ))}
       </div>
@@ -35,11 +35,11 @@ export function ScheduleList({
 
   if (activities.length === 0) {
     return (
-      <div className="text-center py-12 px-6 rounded-2xl bg-zinc-900/20 border border-zinc-800/50 backdrop-blur-md">
+      <div className="text-center py-12 px-6 rounded-2xl bg-white/70 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md transition-colors duration-300">
         <div className="w-12 h-12 rounded-2xl bg-[#1E3A8A]/10 border border-[#1E3A8A]/30 text-[#3B82F6] mx-auto flex items-center justify-center mb-4">
           <CalendarX className="w-6 h-6" />
         </div>
-        <h3 className="text-base font-medium text-white tracking-tight">
+        <h3 className="text-base font-medium text-zinc-900 dark:text-white tracking-tight">
           No activities scheduled.
         </h3>
         <p className="text-xs font-light text-zinc-400 mt-1 flex items-center justify-center gap-1.5">

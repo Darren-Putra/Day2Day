@@ -56,21 +56,21 @@ export function AppNavbar({
   };
 
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 lg:px-8 border-b border-zinc-800/50 bg-zinc-900/30 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 lg:px-8 border-b border-zinc-200 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-900/30 backdrop-blur-xl transition-colors duration-300">
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={onMenuToggle}
-          className="p-2 -ml-2 text-zinc-500 hover:text-white rounded-full hover:bg-zinc-900/50 lg:hidden focus:outline-none transition-colors duration-300"
+          className="p-2 -ml-2 text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900/50 lg:hidden focus:outline-none transition-colors duration-300"
           aria-label="Toggle navigation menu"
         >
           <Menu className="w-5 h-5" />
         </button>
 
-        <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-zinc-500 bg-zinc-900/40 border border-zinc-800/50 px-3 py-1.5 rounded-full">
+        <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-zinc-500 bg-zinc-100 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/50 px-3 py-1.5 rounded-full">
           <Clock className="w-3.5 h-3.5 text-[#3B82F6]" />
           <span>{currentTime ? `${currentTime} WITA` : 'Loading...'}</span>
-          <span className="text-[10px] text-zinc-500 font-sans">
+          <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-sans">
             (Asia/Makassar)
           </span>
         </div>
@@ -78,7 +78,7 @@ export function AppNavbar({
 
       <div className="flex items-center gap-4">
         {/* User profile pill */}
-        <div className="flex items-center gap-3 pl-3 border-l border-zinc-800/50">
+        <div className="flex items-center gap-3 pl-3 border-l border-zinc-200 dark:border-zinc-800/50">
           <div className="flex items-center gap-2.5">
             {userAvatar ? (
               <img
@@ -92,10 +92,10 @@ export function AppNavbar({
               </div>
             )}
             <div className="hidden md:block text-left">
-              <div className="text-xs font-semibold text-zinc-200 leading-tight">
+              <div className="text-xs font-semibold text-zinc-700 dark:text-zinc-200 leading-tight">
                 {userName}
               </div>
-              <div className="text-[11px] text-zinc-500 leading-tight">
+              <div className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-tight">
                 {userEmail}
               </div>
             </div>
@@ -109,7 +109,7 @@ export function AppNavbar({
             onClick={handleLogout}
             disabled={isLoggingOut}
             title="Log Out"
-            className="p-2 text-zinc-500 hover:text-red-400 rounded-full hover:bg-red-500/10 transition-colors duration-300 ml-1"
+            className="p-2 text-zinc-400 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 rounded-full hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors duration-300 ml-1"
           >
             <LogOut className="w-4 h-4" />
           </button>

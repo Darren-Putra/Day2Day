@@ -26,7 +26,7 @@ export function ScheduleCard({ activity, onEdit, onDelete }: ScheduleCardProps) 
   const repeatBadge = repeatLabels[activity.repeat_type];
 
   return (
-    <div className="relative group p-4 rounded-2xl bg-zinc-900/40 border border-zinc-800/50 hover:bg-zinc-900/50 hover:border-[#1E3A8A]/60 transition-all duration-300 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="relative group p-4 rounded-2xl bg-white/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/50 hover:bg-white dark:hover:bg-zinc-900/50 hover:border-blue-200 dark:hover:border-[#1E3A8A]/60 transition-all duration-300 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       {/* Category accent bar on the left */}
       <div
         className="absolute left-0 top-3 bottom-3 w-1 rounded-r-full"
@@ -36,7 +36,7 @@ export function ScheduleCard({ activity, onEdit, onDelete }: ScheduleCardProps) 
       <div className="flex items-start sm:items-center gap-4 pl-2 min-w-0">
         {/* Time block */}
         <div className="flex-shrink-0 text-left sm:text-center w-28">
-          <div className="text-base font-medium font-mono text-white tracking-tight">
+          <div className="text-base font-medium font-mono text-zinc-900 dark:text-white tracking-tight">
             {activity.start} – {activity.end}
           </div>
           <div className="text-[10px] uppercase tracking-widest font-medium font-mono text-[#3B82F6] flex items-center gap-1 mt-0.5">
@@ -47,7 +47,7 @@ export function ScheduleCard({ activity, onEdit, onDelete }: ScheduleCardProps) 
 
         {/* Content */}
         <div className="min-w-0 flex-1">
-          <h4 className="text-sm sm:text-base font-medium text-white group-hover:text-[#3B82F6] transition-colors duration-300 truncate">
+          <h4 className="text-sm sm:text-base font-medium text-zinc-900 dark:text-white group-hover:text-[#3B82F6] transition-colors duration-300 truncate">
             {activity.title}
           </h4>
 

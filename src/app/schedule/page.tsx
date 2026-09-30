@@ -160,7 +160,7 @@ export default function SchedulePage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-zinc-100 flex flex-col">
+    <div className="min-h-screen bg-[#f8f9fc] dark:bg-black text-zinc-800 dark:text-zinc-100 flex flex-col transition-colors duration-300">
       <AppSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -185,7 +185,7 @@ export default function SchedulePage() {
           {/* Header Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-medium tracking-tight text-white">
+              <h2 className="text-2xl font-medium tracking-tight text-zinc-900 dark:text-white">
                 Schedule Management
               </h2>
               <p className="text-[11px] uppercase tracking-widest font-medium text-zinc-500 mt-1">
@@ -196,7 +196,7 @@ export default function SchedulePage() {
             <div className="flex items-center gap-2.5">
               <button
                 onClick={() => setIsFreeTimeModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1E3A8A]/25 hover:bg-zinc-900/50 border border-[#1E3A8A]/60 text-[#3B82F6] text-xs font-medium transition-all duration-300"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-blue-50 dark:bg-[#1E3A8A]/25 hover:bg-blue-100 dark:hover:bg-zinc-900/50 border border-blue-200 dark:border-[#1E3A8A]/60 text-[#3B82F6] text-xs font-medium transition-all duration-300"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>View Free Time Slots</span>
@@ -232,12 +232,12 @@ export default function SchedulePage() {
           {/* 4. Activities Timeline List */}
           <section className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-medium tracking-tight text-white">
+              <h3 className="text-base font-medium tracking-tight text-zinc-900 dark:text-white">
                 Daily Timeline ({activities.length} activities)
               </h3>
               <button
                 onClick={fetchScheduleData}
-                className="p-1.5 text-zinc-500 hover:text-white rounded-full hover:bg-zinc-900/50 transition-colors duration-300"
+                className="p-1.5 text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900/50 transition-colors duration-300"
                 title="Refresh schedule"
               >
                 <RefreshCw className="w-3.5 h-3.5" />

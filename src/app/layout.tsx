@@ -30,20 +30,20 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-black text-zinc-100 selection:bg-[#3B82F6]/30 selection:text-[#3B82F6] relative transition-colors duration-300">
+      <body className="min-h-full flex flex-col bg-[#f8f9fc] dark:bg-black text-zinc-800 dark:text-zinc-100 selection:bg-[#3B82F6]/30 selection:text-[#3B82F6] relative transition-colors duration-300">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
-          disableTransitionOnChange
+          disableTransitionOnChange={false}
         >
           {/* Global Ambient Background */}
-          <div className="fixed inset-0 z-[-1] bg-black transition-colors duration-300">
+          <div className="fixed inset-0 z-[-1] bg-[#f8f9fc] dark:bg-black transition-colors duration-300">
             {/* Subtle Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] dark:opacity-100 opacity-50" />
             {/* Ambient Glows - Navy Style */}
-            <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vh] bg-zinc-800/10 rounded-full blur-3xl pointer-events-none mix-blend-screen" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vh] bg-[#1E3A8A]/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
+            <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vh] bg-blue-100/40 dark:bg-zinc-800/10 rounded-full blur-3xl pointer-events-none dark:mix-blend-screen" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vh] bg-indigo-100/30 dark:bg-[#1E3A8A]/10 rounded-full blur-[120px] pointer-events-none dark:mix-blend-screen" />
           </div>
           
           {children}

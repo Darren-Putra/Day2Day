@@ -83,7 +83,7 @@ export function AssignmentCard({
 
   return (
     <div
-      className={`relative p-5 rounded-2xl border transition-all duration-300 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4 group ${ isCompleted ? 'bg-zinc-950/40 border-zinc-800/50 opacity-60' : isOverdue ? 'bg-red-950/20 border-red-500/30' : 'bg-zinc-900/40 border-zinc-800/50 hover:bg-zinc-900/50 hover:border-[#1E3A8A]/60' }`}
+      className={`relative p-5 rounded-2xl border transition-all duration-300 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4 group ${ isCompleted ? 'bg-zinc-50 dark:bg-zinc-950/40 border-zinc-200 dark:border-zinc-800/50 opacity-60' : isOverdue ? 'bg-red-50/50 dark:bg-red-950/20 border-red-200 dark:border-red-500/30' : 'bg-white/70 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800/50 hover:bg-white dark:hover:bg-zinc-900/50 hover:border-blue-200 dark:hover:border-[#1E3A8A]/60' }`}
     >
       {/* Category accent bar on the left */}
       <div
@@ -111,7 +111,7 @@ export function AssignmentCard({
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <h4
-              className={`text-sm sm:text-base font-medium truncate transition-colors duration-300 ${ isCompleted ? 'text-zinc-500 line-through' : 'text-white group-hover:text-[#3B82F6]' }`}
+              className={`text-sm sm:text-base font-medium truncate transition-colors duration-300 ${ isCompleted ? 'text-zinc-500 line-through' : 'text-zinc-900 dark:text-white group-hover:text-[#3B82F6]' }`}
             >
               {assignment.title}
             </h4>

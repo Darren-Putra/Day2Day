@@ -4,12 +4,25 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
+  --background: #f8f9fc;
+  --foreground: #1a1a2e;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --accent-primary: #6366f1;
+  --accent-secondary: #06b6d4;
+  --surface-secondary: #f1f3f8;
+  --surface-tertiary: #e8eaf0;
+}
+
+.dark {
   --background: #0b0f19;
   --foreground: #f3f4f6;
   --card-bg: rgba(17, 24, 39, 0.75);
   --card-border: rgba(255, 255, 255, 0.08);
   --accent-primary: #6366f1;
   --accent-secondary: #06b6d4;
+  --surface-secondary: rgba(24, 24, 27, 0.4);
+  --surface-tertiary: rgba(24, 24, 27, 0.6);
 }
 
 body {
@@ -45,6 +58,12 @@ body {
 }
 ::-webkit-scrollbar-track {
   background: rgba(15, 23, 42, 0.6);
+}
+.dark ::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+:root ::-webkit-scrollbar-track {
+  background: rgba(200, 205, 215, 0.4);
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(100, 116, 139, 0.4);
