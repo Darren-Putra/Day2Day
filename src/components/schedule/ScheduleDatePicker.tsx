@@ -33,12 +33,12 @@ export function ScheduleDatePicker({
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-white/70 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 rounded-2xl backdrop-blur-md">
+    <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-zinc-900/40 border border-zinc-800/50 rounded-2xl backdrop-blur-md">
       {/* Navigation Buttons */}
       <div className="flex items-center gap-1.5">
         <button
           onClick={handlePreviousDay}
-          className="flex items-center gap-1 px-3 py-2 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white bg-gray-800/70 hover:bg-gray-700/80 rounded-3xl transition-colors border border-gray-700/50"
+          className="flex items-center gap-1 px-3 py-2 text-[11px] uppercase tracking-widest font-medium text-zinc-400 hover:text-white bg-zinc-900/40 hover:bg-zinc-900/80 rounded-full transition-colors duration-300 border border-zinc-800/50"
           title="Previous Day"
         >
           <ChevronLeft className="w-4 h-4" />
@@ -48,7 +48,7 @@ export function ScheduleDatePicker({
         {!isToday && (
           <button
             onClick={handleGoToToday}
-            className="px-3 py-2 text-xs font-semibold text-[#3B82F6] dark:text-[#3B82F6] hover:text-indigo-300 bg-[#1E3A8A]/10 dark:bg-[#1E3A8A]/25 hover:bg-[#1E3A8A]/20 hover:dark:bg-[#1E3A8A]/40 border border-indigo-500/30 rounded-3xl transition-colors"
+            className="px-4 py-2 text-[11px] uppercase tracking-widest font-medium text-[#3B82F6] hover:text-cyan-300 bg-[#1E3A8A]/25 hover:bg-zinc-900/50 border border-[#1E3A8A]/60 rounded-full transition-colors duration-300"
           >
             Today
           </button>
@@ -58,10 +58,10 @@ export function ScheduleDatePicker({
       {/* Date Display */}
       <div className="flex items-center gap-3">
         <div className="text-center">
-          <div className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 flex items-center justify-center gap-2">
+          <div className="text-base sm:text-lg font-medium text-white flex items-center justify-center gap-2 tracking-tight">
             <span>{formatDisplayDate(selectedDate)}</span>
             {isToday && (
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/15 text-[#3B82F6] dark:text-[#3B82F6] border border-cyan-500/30">
+              <span className="text-[10px] uppercase font-medium tracking-widest px-2 py-0.5 rounded-full bg-[#1E3A8A]/25 text-[#3B82F6] border border-[#1E3A8A]/60">
                 Today
               </span>
             )}
@@ -70,7 +70,7 @@ export function ScheduleDatePicker({
 
         {/* Hidden / Quick date input trigger */}
         <div className="relative">
-          <label className="p-2 text-zinc-500 dark:text-zinc-500 hover:text-[#3B82F6] hover:dark:text-[#3B82F6] rounded-2xl hover:bg-gray-800/70 cursor-pointer flex items-center justify-center transition-colors">
+          <label className="p-2 text-zinc-500 hover:text-[#3B82F6] rounded-full hover:bg-zinc-900/50 cursor-pointer flex items-center justify-center transition-colors duration-300">
             <CalendarIcon className="w-4 h-4" />
             <input
               type="date"
@@ -87,7 +87,7 @@ export function ScheduleDatePicker({
       <div className="flex items-center">
         <button
           onClick={handleNextDay}
-          className="flex items-center gap-1 px-3 py-2 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white bg-gray-800/70 hover:bg-gray-700/80 rounded-3xl transition-colors border border-gray-700/50"
+          className="flex items-center gap-1 px-3 py-2 text-[11px] uppercase tracking-widest font-medium text-zinc-400 hover:text-white bg-zinc-900/40 hover:bg-zinc-900/80 rounded-full transition-colors duration-300 border border-zinc-800/50"
           title="Next Day"
         >
           <span className="hidden sm:inline">Next Day</span>

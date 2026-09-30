@@ -212,20 +212,20 @@ export function ScheduleFormModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800/50 rounded-3xl shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-lg bg-zinc-950 border border-zinc-800/50 rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-300 dark:border-zinc-800/50 bg-gray-950/50">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-800/50 bg-zinc-900/40">
           <div>
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">
+            <h3 className="text-lg font-medium text-white tracking-tight">
               {editingActivity ? 'Edit Activity' : 'Create Activity'}
             </h3>
-            <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">
+            <p className="text-[11px] uppercase tracking-widest font-medium text-zinc-500 mt-1">
               Add college task, lecture, or study session
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-3xl hover:bg-zinc-200 hover:dark:bg-zinc-800 transition-colors"
+            className="p-2 text-zinc-500 hover:text-white rounded-full hover:bg-zinc-800/50 transition-colors duration-300"
           >
             <X className="w-5 h-5" />
           </button>
@@ -250,14 +250,14 @@ export function ScheduleFormModal({
 
           {/* General API Error */}
           {apiError && (
-            <div className="p-3 rounded-3xl bg-red-900/30 border border-red-800 text-red-400 text-xs">
+            <div className="p-3 rounded-2xl bg-red-900/30 border border-red-800/50 text-red-400 text-xs font-light">
               {apiError}
             </div>
           )}
 
           {/* Activity Name */}
           <div>
-            <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] uppercase tracking-widest font-medium text-zinc-400 mb-1.5">
               Activity Name
             </label>
             <input
@@ -266,19 +266,19 @@ export function ScheduleFormModal({
               placeholder="e.g. Belajar Next.js / Kuliah Algoritma"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-3xl bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800/50 text-sm text-zinc-900 dark:text-zinc-100 placeholder-gray-500 focus:outline-none focus:border-[#1E3A8A] focus:dark:border-[#1E3A8A] transition-colors"
+              className="w-full px-4 py-2.5 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-[#1E3A8A] transition-colors"
             />
           </div>
 
           {/* Category (Eisenhower Matrix) */}
           <div>
-            <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] uppercase tracking-widest font-medium text-zinc-400 mb-1.5">
               Category (Eisenhower Matrix)
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as ScheduleCategory)}
-              className="w-full px-4 py-2.5 rounded-3xl bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800/50 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-[#1E3A8A] focus:dark:border-[#1E3A8A] transition-colors"
+              className="w-full px-4 py-2.5 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-sm text-zinc-100 focus:outline-none focus:border-[#1E3A8A] transition-colors"
             >
               <option value="IMPORTANT_URGENT">Important & Urgent (Q1: Do First)</option>
               <option value="IMPORTANT_NOT_URGENT">Important & Not Urgent (Q2: Schedule)</option>
@@ -289,7 +289,7 @@ export function ScheduleFormModal({
 
           {/* Date */}
           <div>
-            <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] uppercase tracking-widest font-medium text-zinc-400 mb-1.5">
               Date
             </label>
             <div className="relative">
@@ -298,7 +298,7 @@ export function ScheduleFormModal({
                 required
                 value={date}
                 onChange={(e) => handleDateChange(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-3xl bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800/50 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-[#1E3A8A] focus:dark:border-[#1E3A8A] transition-colors"
+                className="w-full px-4 py-2.5 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-sm text-zinc-100 focus:outline-none focus:border-[#1E3A8A] transition-colors"
               />
             </div>
           </div>
@@ -306,7 +306,7 @@ export function ScheduleFormModal({
           {/* Start and End Time */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] uppercase tracking-widest font-medium text-zinc-400 mb-1.5">
                 Start Time
               </label>
               <input
@@ -314,12 +314,12 @@ export function ScheduleFormModal({
                 required
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-3xl bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800/50 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-[#1E3A8A] focus:dark:border-[#1E3A8A] transition-colors font-mono"
+                className="w-full px-4 py-2.5 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-sm text-zinc-100 focus:outline-none focus:border-[#1E3A8A] transition-colors font-mono"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] uppercase tracking-widest font-medium text-zinc-400 mb-1.5">
                 End Time
               </label>
               <input
@@ -327,20 +327,20 @@ export function ScheduleFormModal({
                 required
                 value={end}
                 onChange={(e) => setEnd(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-3xl bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800/50 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-[#1E3A8A] focus:dark:border-[#1E3A8A] transition-colors font-mono"
+                className="w-full px-4 py-2.5 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-sm text-zinc-100 focus:outline-none focus:border-[#1E3A8A] transition-colors font-mono"
               />
             </div>
           </div>
 
           {/* Repeat */}
           <div>
-            <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] uppercase tracking-widest font-medium text-zinc-400 mb-1.5">
               Repeat
             </label>
             <select
               value={repeatType}
               onChange={(e) => handleRepeatChange(e.target.value as RepeatType)}
-              className="w-full px-4 py-2.5 rounded-3xl bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800/50 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-[#1E3A8A] focus:dark:border-[#1E3A8A] transition-colors"
+              className="w-full px-4 py-2.5 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-sm text-zinc-100 focus:outline-none focus:border-[#1E3A8A] transition-colors"
             >
               <option value="none">Does not repeat</option>
               <option value="daily">Every day</option>
@@ -353,8 +353,8 @@ export function ScheduleFormModal({
 
           {/* Weekly day checkboxes */}
           {(repeatType === 'weekly' || repeatType === 'custom') && (
-            <div className="p-3 rounded-3xl bg-gray-950/60 border border-zinc-300 dark:border-zinc-800/50 space-y-2">
-              <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-500 uppercase tracking-wider block">
+            <div className="p-3 rounded-2xl bg-zinc-900/40 border border-zinc-800/50 space-y-2">
+              <span className="text-[10px] font-medium text-zinc-400 uppercase tracking-widest block">
                 Repeat on Days:
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -365,7 +365,7 @@ export function ScheduleFormModal({
                       type="button"
                       key={d}
                       onClick={() => toggleDay(d)}
-                      className={`px-2.5 py-1 text-xs rounded-2xl font-medium transition-colors ${ isSelected ? 'bg-[#1D4ED8] dark:bg-[#1D4ED8] text-zinc-900 dark:text-white font-bold' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-500 hover:text-zinc-800 hover:dark:text-zinc-200' }`}
+                      className={`px-3 py-1 text-[11px] uppercase tracking-widest rounded-full font-medium transition-colors duration-300 ${ isSelected ? 'bg-[#1E3A8A] text-white' : 'bg-zinc-800/50 text-zinc-400 hover:text-white hover:bg-zinc-700/50' }`}
                     >
                       {d.slice(0, 3)}
                     </button>
@@ -387,31 +387,31 @@ export function ScheduleFormModal({
           {/* Repeat Until Date */}
           {repeatType !== 'none' && (
             <div>
-              <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-500 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] uppercase tracking-widest font-medium text-zinc-400 mb-1.5">
                 Repeat Until (Optional)
               </label>
               <input
                 type="date"
                 value={repeatUntil}
                 onChange={(e) => setRepeatUntil(e.target.value)}
-                className="w-full px-4 py-2 rounded-3xl bg-white dark:bg-black border border-zinc-300 dark:border-zinc-800/50 text-xs text-zinc-800 dark:text-zinc-200 focus:outline-none focus:border-[#1E3A8A] focus:dark:border-[#1E3A8A]"
+                className="w-full px-4 py-2.5 rounded-full bg-zinc-900/40 border border-zinc-800/50 text-sm text-zinc-100 focus:outline-none focus:border-[#1E3A8A] transition-colors"
               />
             </div>
           )}
 
           {/* Action Buttons */}
-          <div className="pt-4 flex items-center justify-end gap-3 border-t border-zinc-300 dark:border-zinc-800/50">
+          <div className="pt-4 flex items-center justify-end gap-3 border-t border-zinc-800/50">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-medium text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-3xl hover:bg-zinc-200 hover:dark:bg-zinc-800 transition-colors"
+              className="px-5 py-2.5 text-xs font-medium text-zinc-400 hover:text-white rounded-full hover:bg-zinc-800/50 transition-colors duration-300"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting || Boolean(conflictWarning)}
-              className="px-5 py-2.5 text-xs font-bold text-zinc-900 dark:text-white bg-[#1D4ED8] dark:bg-[#1D4ED8] hover:bg-[#1E3A8A] hover:dark:bg-[#1E3A8A] rounded-3xl shadow-lg shadow-indigo-600/30 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2.5 text-xs font-medium text-white bg-[#1E3A8A] hover:bg-[#1E40AF] rounded-full shadow-lg shadow-blue-900/20 active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Saving...' : editingActivity ? 'Save Changes' : 'Create Activity'}
             </button>

@@ -80,6 +80,9 @@ export function SchedulePieChart({
 
   // 3. SVG Donut Arc calculations
   const size = 260;
+  const hoverGrow = 6;
+  const padding = hoverGrow; // extra space so hover stroke is never clipped
+  const paddedSize = size + padding * 2;
   const strokeWidth = 32;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -87,14 +90,15 @@ export function SchedulePieChart({
   let accumulatedPercentage = 0;
 
   return (
-    <div className="p-6 rounded-2xl bg-zinc-100/80 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 backdrop-blur-md flex flex-col md:flex-row items-center gap-8">
+    <div className="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/50 backdrop-blur-md flex flex-col md:flex-row items-center gap-8">
       {/* Donut Chart Visual */}
-      <div className="relative flex-shrink-0 flex items-center justify-center">
+      <div className="relative flex-shrink-0 flex items-center justify-center" style={{ width: paddedSize, height: paddedSize }}>
         <svg
-          width={size}
-          height={size}
-          viewBox={`0 0 ${size} ${size}`}
+          width={paddedSize}
+          height={paddedSize}
+          viewBox={`${-padding} ${-padding} ${paddedSize} ${paddedSize}`}
           className="transform -rotate-90"
+          style={{ overflow: 'visible' }}
         >
           {/* Background circle track */}
           <circle
@@ -121,7 +125,7 @@ export function SchedulePieChart({
                 r={radius}
                 fill="transparent"
                 stroke={slice.color}
-                strokeWidth={isHovered ? strokeWidth + 6 : strokeWidth}
+                strokeWidth={isHovered ? strokeWidth + hoverGrow : strokeWidth}
                 strokeDasharray={strokeDasharray}
                 strokeDashoffset={strokeDashoffset}
                 strokeLinecap="round"
@@ -137,25 +141,25 @@ export function SchedulePieChart({
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4">
           {hoveredSlice ? (
             <div className="animate-in fade-in duration-150">
-              <span className="text-xs text-zinc-500 dark:text-zinc-500 font-medium truncate block max-w-[120px]">
+              <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500 truncate block max-w-[120px]">
                 {hoveredSlice.title}
               </span>
-              <span className="text-xl font-bold text-zinc-900 dark:text-white font-mono">
+              <span className="text-3xl font-medium text-white font-mono mt-1">
                 {hoveredSlice.percentage}%
               </span>
-              <span className="text-[11px] text-zinc-500 dark:text-zinc-500 block font-mono">
+              <span className="text-xs text-zinc-400 block font-mono font-light mt-1">
                 {formatDuration(hoveredSlice.duration_minutes)}
               </span>
             </div>
           ) : (
             <div>
-              <span className="text-[11px] text-zinc-500 dark:text-zinc-500 uppercase tracking-wider font-semibold block">
+              <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500 block">
                 24 Hours
               </span>
-              <span className="text-2xl font-bold text-zinc-900 dark:text-white font-mono">
+              <span className="text-3xl font-medium text-white font-mono mt-1">
                 {((freeMinutes / totalMinutes) * 100).toFixed(0)}%
               </span>
-              <span className="text-[11px] text-[#3B82F6] dark:text-[#3B82F6] flex items-center justify-center gap-1">
+              <span className="text-[10px] uppercase tracking-widest font-medium text-[#3B82F6] flex items-center justify-center gap-1 mt-1">
                 <Sparkles className="w-3 h-3" />
                 Free Time
               </span>
@@ -166,11 +170,11 @@ export function SchedulePieChart({
 
       {/* Legend & Details */}
       <div className="flex-1 w-full space-y-3">
-        <div className="flex items-center justify-between pb-2 border-b border-zinc-300 dark:border-zinc-800/50">
-          <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+        <div className="flex items-center justify-between pb-3 border-b border-zinc-800/50">
+          <h3 className="text-sm font-medium text-white tracking-tight">
             24-Hour Time Distribution
           </h3>
-          <span className="text-xs font-mono text-zinc-500 dark:text-zinc-500">1440 min (100%)</span>
+          <span className="text-[10px] uppercase tracking-widest font-medium text-zinc-500">1440 min (100%)</span>
         </div>
 
         <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
@@ -179,7 +183,7 @@ export function SchedulePieChart({
               key={slice.id}
               onMouseEnter={() => setHoveredSlice(slice)}
               onMouseLeave={() => setHoveredSlice(null)}
-              className={`flex items-center justify-between p-2 rounded-3xl transition-colors cursor-pointer ${ hoveredSlice?.id === slice.id ? 'bg-white/80 dark:bg-zinc-800/50 border border-zinc-300 dark:border-zinc-800/50' : 'hover:bg-gray-800/40' }`}
+              className={`flex items-center justify-between p-2 rounded-2xl transition-all duration-300 cursor-pointer ${ hoveredSlice?.id === slice.id ? 'bg-zinc-900/50 border border-zinc-800/50' : 'hover:bg-zinc-900/40 border border-transparent' }`}
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span
@@ -187,11 +191,11 @@ export function SchedulePieChart({
                   style={{ backgroundColor: slice.color }}
                 />
                 <div className="min-w-0">
-                  <div className="text-xs font-medium text-zinc-800 dark:text-zinc-200 truncate">
+                  <div className="text-xs font-medium text-zinc-200 truncate group-hover:text-white transition-colors">
                     {slice.title}
                   </div>
                   {slice.timeRange && (
-                    <div className="text-[10px] text-zinc-500 dark:text-zinc-500 font-mono">
+                    <div className="text-[10px] uppercase tracking-widest font-medium text-zinc-500 font-mono mt-0.5">
                       {slice.timeRange}
                     </div>
                   )}
@@ -199,10 +203,10 @@ export function SchedulePieChart({
               </div>
 
               <div className="text-right flex-shrink-0 ml-3">
-                <div className="text-xs font-bold font-mono text-zinc-800 dark:text-zinc-200">
+                <div className="text-xs font-medium font-mono text-zinc-200">
                   {formatDuration(slice.duration_minutes)}
                 </div>
-                <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-500">
+                <div className="text-[10px] font-medium font-mono text-[#3B82F6] mt-0.5">
                   {slice.percentage}%
                 </div>
               </div>
