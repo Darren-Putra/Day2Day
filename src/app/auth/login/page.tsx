@@ -7,9 +7,6 @@ import {
   Sparkles,
   CalendarClock,
   ShieldAlert,
-  ArrowRight,
-  Code2,
-  PieChart,
 } from 'lucide-react';
 
 export default function LoginPage() {
@@ -40,13 +37,6 @@ export default function LoginPage() {
       setErrorMessage('Failed to initialize Google OAuth sign in.');
       setIsLoading(false);
     }
-  };
-
-  const handleDemoAccess = () => {
-    // Set development session cookie for browser access
-    document.cookie = 'd2d_session=dev_user_darren; path=/; max-age=86400; SameSite=Lax';
-    router.push('/dashboard');
-    router.refresh();
   };
 
   return (
@@ -110,23 +100,6 @@ export default function LoginPage() {
               />
             </svg>
             <span>{isLoading ? 'Connecting to Google...' : 'Continue with Google'}</span>
-          </button>
-
-          <div className="relative flex py-2 items-center">
-            <div className="flex-grow border-t border-zinc-800/50" />
-            <span className="flex-shrink mx-3 text-[10px] text-zinc-500 uppercase tracking-widest font-mono">
-              OR
-            </span>
-            <div className="flex-grow border-t border-zinc-800/50" />
-          </div>
-
-          {/* Dev Demo Mode */}
-          <button
-            onClick={handleDemoAccess}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-800/50 text-white text-[11px] uppercase tracking-widest font-medium transition-colors duration-300"
-          >
-            <span>Enter Workspace Preview</span>
-            <ArrowRight className="w-3.5 h-3.5" />
           </button>
 
           {/* Feature Highlights */}
